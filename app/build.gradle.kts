@@ -1,14 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.compose.compiler)
+
 }
 
 android {
+    buildFeatures {
+        compose = true
+    }
     namespace = "com.example.drugdose"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
         }
     }
+
 
     defaultConfig {
         applicationId = "com.example.drugdose"
@@ -35,7 +41,42 @@ android {
     }
 }
 
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFiles.addAll(rootProject.layout.projectDirectory.file("stability_config.conf"))
+}
 dependencies {
+    dependencies {
+
+        val composeBom = platform("androidx.compose:compose-bom:2026.03.00")
+        implementation(composeBom)
+        androidTestImplementation(composeBom)
+
+        // Choose one of the following:
+        // Material Design 3
+        implementation("androidx.compose.material3:material3")
+        // Android Studio Preview support
+        implementation("androidx.compose.ui:ui-tooling-preview")
+        debugImplementation("androidx.compose.ui:ui-tooling")
+
+        // UI Tests
+        androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+        debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+        // Optional - Add window size utils
+        implementation("androidx.compose.material3.adaptive:adaptive")
+
+        // Optional - Integration with activities
+        implementation("androidx.activity:activity-compose:1.13.0")
+        // Optional - Integration with ViewModels
+        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+        // Optional - Integration with LiveData
+        implementation("androidx.compose.runtime:runtime-livedata")
+        // Optional - Integration with RxJava
+        implementation("androidx.compose.runtime:runtime-rxjava2")
+
+    }
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -44,4 +85,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }

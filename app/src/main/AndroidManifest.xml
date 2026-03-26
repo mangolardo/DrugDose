@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrugDose">
         <activity
+            android:name=".Info"
+            android:exported="false" />
+        <activity
+            android:name=".Profiles"
+            android:exported="false" />
+        <activity
+            android:name=".Result"
+            android:exported="false" />
+        <activity
+            android:name=".Form"
+            android:exported="false" />
+        <activity
+            android:name=".List"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
