@@ -71,9 +71,9 @@ dependencies {
         // Optional - Integration with ViewModels
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
         // Optional - Integration with LiveData
-        implementation("androidx.compose.runtime:runtime-livedata")
+       // implementation("androidx.compose.runtime:runtime-livedata")
         // Optional - Integration with RxJava
-        implementation("androidx.compose.runtime:runtime-rxjava2")
+        //implementation("androidx.compose.runtime:runtime-rxjava2")
 
     }
 
@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
