@@ -12,22 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrugDose">
         <activity
-            android:name=".Info"
+            android:name=".ui.Info"
             android:exported="false" />
         <activity
-            android:name=".Profiles"
+            android:name=".ui.Profiles"
             android:exported="false" />
         <activity
-            android:name=".Result"
+            android:name=".ui.Result"
             android:exported="false" />
         <activity
-            android:name=".Form"
+            android:name=".ui.Form"
             android:exported="false" />
         <activity
-            android:name=".List"
+            android:name=".ui.List"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

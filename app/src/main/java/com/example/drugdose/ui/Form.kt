@@ -1,17 +1,17 @@
-package com.example.drugdose
+package com.example.drugdose.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.drugdose.ui.Result
+
 //visualize standard form. Get user input to calculate dose and alerts based on selected medicine
 // maybe create method to generate custom form for selected med, based on med profile (ex. med not recc for pregnant subjects, add pregnancy radio button)
 // OR calculate alerts based on med BEFORE form
@@ -20,16 +20,17 @@ class Form : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
+                horizontalAlignment = Alignment.Companion.CenterHorizontally,
+                modifier = Modifier.Companion
                     .fillMaxWidth()
             ) {
                 Text(text = intent.getStringExtra("Medname")!!)
                 Button(onClick = {
                     val Intent = Intent(applicationContext, Result::class.java)
                     startActivity(Intent)
-                }){Text(text="Confirm")}
+                }) { Text(text = "Confirm") }
             }
         }
     }
 }
+//is activity
