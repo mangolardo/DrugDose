@@ -2,6 +2,7 @@ package com.example.drugdose.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
@@ -15,20 +16,22 @@ import com.example.drugdose.ui.Result
 //visualize standard form. Get user input to calculate dose and alerts based on selected medicine
 // maybe create method to generate custom form for selected med, based on med profile (ex. med not recc for pregnant subjects, add pregnancy radio button)
 // OR calculate alerts based on med BEFORE form
-class Form : AppCompatActivity() {
+class Form : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val activity = this
         setContent {
             Column(
-                horizontalAlignment = Alignment.Companion.CenterHorizontally,
-                modifier = Modifier.Companion
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Text(text = intent.getStringExtra("Medname")!!)
+                Text(text = intent.getStringExtra("MedId")!!)
+
                 Button(onClick = {
-                    val Intent = Intent(applicationContext, Result::class.java)
-                    startActivity(Intent)
-                }) { Text(text = "Confirm") }
+                    switchAct(activity,Result::class.java)
+                })
+                { Text(text = "Confirm") }
             }
         }
     }

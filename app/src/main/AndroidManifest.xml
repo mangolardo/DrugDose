@@ -24,7 +24,7 @@
             android:name=".ui.Form"
             android:exported="false" />
         <activity
-            android:name=".ui.List"
+            android:name=".ui.ListAct"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
