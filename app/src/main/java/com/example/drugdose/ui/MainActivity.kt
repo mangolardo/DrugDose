@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import java.io.File
 import kotlin.getValue
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 @Composable
-fun AppContent(activity : Activity, nextClass : Class<*>){
+fun AppContent(activity : Activity, nextClass : Class<*> ){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier

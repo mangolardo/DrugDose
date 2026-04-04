@@ -5,23 +5,33 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.ui.components.MedList
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import kotlin.getValue
 
 //is activity
 class ListAct : ComponentActivity() {
-    private val viewModel: DrugDoseViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-                 //listOf(Medicine(1, "med1"), Medicine(2, "med2"), Medicine(3, "med3"))
+        val file =
+            (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
+
+       val list = Json.decodeFromString<Medicine>(""+file+"") // doesnt work for some reason
+
+        // val viewModel: DrugDoseViewModel = DrugDoseViewModel(list)
+             val list2 = listOf(Medicine("11", "med1"), Medicine("22", "med2"), Medicine("33", "med3"))
         setContent {
-            val uiState by viewModel.uistate.collectAsStateWithLifecycle()
-            val meds = uiState.meds
+            Text(text=file)
+
+            //val uiState by viewModel.uistate.collectAsStateWithLifecycle()
+            val meds = list2
 
             val medLazyListState = rememberLazyListState()
             MedList(
@@ -34,3 +44,4 @@ class ListAct : ComponentActivity() {
 
     }
 }
+
