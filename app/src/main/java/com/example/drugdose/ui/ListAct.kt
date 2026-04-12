@@ -23,7 +23,7 @@ class ListAct : ComponentActivity() {
         val file =
             (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
 
-       val list = Json.decodeFromString<Medicine>(""+file+"") // doesnt work for some reason
+       val list = Json.decodeFromString<List<Medicine>>(file) // doesnt work for some reason
 
         // val viewModel: DrugDoseViewModel = DrugDoseViewModel(list)
              val list2 = listOf(Medicine("11", "med1"), Medicine("22", "med2"), Medicine("33", "med3"))
@@ -31,7 +31,7 @@ class ListAct : ComponentActivity() {
             Text(text=file)
 
             //val uiState by viewModel.uistate.collectAsStateWithLifecycle()
-            val meds = list2
+            val meds = list
 
             val medLazyListState = rememberLazyListState()
             MedList(

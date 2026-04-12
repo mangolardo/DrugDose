@@ -44,6 +44,6 @@ fun MedListItem (
      .clickable { action(med.id) }
  )
  {
-  Text(text = "meow")
+  Text(text = med.name)
  }
 }

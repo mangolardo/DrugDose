@@ -1,7 +1,7 @@
- {
+[{
   "id" : "32846281",
   "name": "Amikacin",
   "unit" : "kg",
   "maxDose": 15.0,
   "pregnantOk" : true
-}
+}]
