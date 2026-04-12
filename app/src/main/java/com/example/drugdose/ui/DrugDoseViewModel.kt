@@ -13,19 +13,23 @@ import java.io.File
 
 
 class DrugDoseViewModel(meds : List<Medicine>) : ViewModel(){
-    val uistate = MutableStateFlow(UiState())
-    init {
-        initList(meds)
+//    val uistate = MutableStateFlow(UiState())
+//    init {
+//        initList(meds)
+//    }
+    var _meds : List<Medicine> = emptyList()
+    init{
+        _meds = meds
     }
 
-    private fun initList(meds : List<Medicine>) {
-        uistate.value = UiState(
-            meds = meds
-        )
-    }
+//    private fun initList(meds : List<Medicine>) {
+//        uistate.value = UiState(
+//            meds = meds
+//        )
+//    }
 }
-data class UiState(
-    val meds : List<Medicine> = emptyList()
-)
+//data class UiState(
+//    val meds : List<Medicine> = emptyList()
+//)
 
 //ui state for selected med on list,for navigation, form values to remember
