@@ -2,8 +2,9 @@ package com.example.drugdose.ui
 
 import android.app.Activity
 import android.content.Intent
+import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.Medicine
-import kotlinx.serialization.json.Json
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 //write utils to parse and search JSON
@@ -16,8 +17,10 @@ fun switchToForm(activity : Activity, medId : String){
     intent.putExtra("MedId", medId)
     activity.startActivity(intent)
 }
-fun calculateDose (fields : Map<String,String>, med : String, context : Activity ):String {
-    val medObj = Json.decodeFromString<Medicine>(med)
+//assuming dose is in milligrams
+fun calculateDose (fields : Map<String,String>, medObj : Medicine ):String {
+//check for max dose
+
     //check min/max age,weight
     val result = mutableListOf<String>()
     val age = fields.getValue("Age")
@@ -37,6 +40,7 @@ fun calculateDose (fields : Map<String,String>, med : String, context : Activity
     } else {
         dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())}
 
+    if(medObj.maxDose != null && dose > medObj.maxDose) { dose = medObj.maxDose}
     result.add(dose.toString())
 
     return result.joinToString(",")
@@ -49,3 +53,18 @@ fun calculateOnM2(dose : Double, h : Int, w : Double): Double {
 return dose * bsa
 }
 
+fun convertToCommercial(dose : Double, med : Medicine):Dosage{
+    //fix this
+    val iter = med.dosages.listIterator(1)
+    var diff = abs(dose - med.dosages[0].dose)
+    var closest : Dosage = med.dosages[0]
+    while (iter.hasNext()) {
+        val commDose = iter.next()
+        val curr = abs(dose - commDose.dose)
+         if( curr < diff)
+         { diff = curr
+         closest = commDose}
+    }
+    return closest
+}
+//method do convert dose in actual commercial dosage

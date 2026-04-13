@@ -2,6 +2,7 @@ package com.example.drugdose.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +14,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.drugdose.data.Dosage
+import com.example.drugdose.ui.components.AlertBox
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 
-class Result : AppCompatActivity() {
+class Result : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val context = this
@@ -26,19 +31,23 @@ class Result : AppCompatActivity() {
             startActivity(intent)
         }
         val result = intent.getStringExtra("dose")!!
+
         //parse the result to create alert for min/max age/weight
         val args = result.split(",")
-        var txt = ""
-
-        if(args.contains("MaxAge")){ txt += "Etá max superata. "}
-        else if(args.contains("MinAge")){txt += "Etá inferiore al minimo. "}
-        else if(args.contains("MaxWeight")){txt += "Peso max superato. "}
-        else if(args.contains("MinWeight")){txt += "Peso inferiore al minimo. "}
-        txt += args.last() + "mg"
 
 
+
+        val dose = args.last()
+        val name = intent.getStringExtra("name")
+        val commercial =  Json.decodeFromString<Dosage>(intent.getStringExtra("commercial")!!)
+        val n = dose.toDouble()/commercial.dose
+
+//        if(!intent.getBooleanExtra("pregnantOk",true)){
+//            txt += "Not safe during pregnancy. "
+//        }
 
         setContent {
+           if (args.dropLast(1).isNotEmpty()) { AlertBox(args = args.dropLast(1)) }
            Button(
                 {
 
@@ -49,7 +58,7 @@ class Result : AppCompatActivity() {
                   startActivity(intent)
                 }
             ){
-            Text(text = txt)
+            Text(text = "$name$dose mg equivalent:" + n.toFloat() + commercial.type + "of" + commercial.dose )
             }
             }
         }

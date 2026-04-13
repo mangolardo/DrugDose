@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 import com.example.drugdose.data.*
 import java.io.File
 
-
+//maybe reuse for form viewmodel instead of list???
 class DrugDoseViewModel(meds : List<Medicine>) : ViewModel(){
 //    val uistate = MutableStateFlow(UiState())
 //    init {
@@ -32,4 +32,4 @@ class DrugDoseViewModel(meds : List<Medicine>) : ViewModel(){
 //    val meds : List<Medicine> = emptyList()
 //)
 
-//ui state for selected med on list,for navigation, form values to remember
+//ui state for navigation, form values to remember
