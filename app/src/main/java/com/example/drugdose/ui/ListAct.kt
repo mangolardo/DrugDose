@@ -18,7 +18,7 @@ import kotlin.getValue
 
 //is activity
 class ListAct : ComponentActivity() {
-     private lateinit var drugModel : DrugDoseViewModel
+    lateinit var drugModel : DrugDoseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,7 @@ class ListAct : ComponentActivity() {
         val file =
             (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
 
-       val list = Json.decodeFromString<List<Medicine>>(file) // doesnt work for some reason
+       val list = Json.decodeFromString<List<Medicine>>(file)
 
           drugModel = DrugDoseViewModel(list)
 //             val list2 = listOf(Medicine("11", "med1"), Medicine("22", "med2"), Medicine("33", "med3"))

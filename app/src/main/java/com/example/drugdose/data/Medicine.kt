@@ -11,9 +11,15 @@ data class Medicine(
     val id: String,
     val name : String,
     val unit : String = "",
+    val mgPerUnit : Double,
+    val maxAge : Int,
+    val minAge : Int,
+    val maxWeight : Double,
+    val minWeight : Double,
     //maybe make class for unit?? /m2 or /kg
-    val maxDose : Float? = null,
-    //Unit,Float
-  //  val alerts : List<*>? = null ,//diff types of restrictions : ageRes, weightRes,pathologies, incompatibility
+    val maxDose : Double? = null,
+    //Unit,Double
+  //  val alerts : List<*>? = null ,//diff types of restrictions : pathologies, incompatibility
     val pregnantOk : Boolean? = null
+
 )
