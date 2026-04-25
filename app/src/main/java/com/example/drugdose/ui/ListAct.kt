@@ -18,29 +18,29 @@ import kotlin.getValue
 
 //is activity
 class ListAct : ComponentActivity() {
-    lateinit var drugModel : DrugDoseViewModel
+   // lateinit var drugModel : DrugDoseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // drugModel() = ViewModelProvider(this)[DrugDoseViewModel::class.java]
 
-        val file =
-            (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
+//        val file =
+//            (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
+//
+//       val list = Json.decodeFromString<List<Medicine>>(file)
 
-       val list = Json.decodeFromString<List<Medicine>>(file)
-
-          drugModel = DrugDoseViewModel(list)
+         // drugModel = DrugDoseViewModel(list)
 //             val list2 = listOf(Medicine("11", "med1"), Medicine("22", "med2"), Medicine("33", "med3"))
 
 
         setContent {
-            Text(text=file)
+            Text(text="List of medicines")
 
             //val uiState by viewModel.uistate.collectAsStateWithLifecycle()
 
             val medLazyListState = rememberLazyListState()
             MedList(
-                meds = drugModel._meds ,
+                json = this.assets.open("medsJson.json") ,
                 action = { medId -> switchToForm(this, medId) },
                 state = medLazyListState
             )

@@ -18,6 +18,7 @@ import com.example.drugdose.data.Dosage
 import com.example.drugdose.ui.components.AlertBox
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import java.math.RoundingMode
 
 class Result : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ class Result : ComponentActivity() {
                   startActivity(intent)
                 }
             ){
-            Text(text = "$name$dose mg equivalent:" + n.toFloat() + commercial.type + "of" + commercial.dose )
+            Text(text = "$name$dose mg. Equivalent:" + n.toBigDecimal().setScale(1, RoundingMode.HALF_DOWN) + " " + commercial.type + " of " + commercial.dose )
             }
             }
         }
