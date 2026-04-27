@@ -1,4 +1,6 @@
 package com.example.drugdose.ui.components
 
-class Navbar {
-}
+import androidx.compose.runtime.Composable
+
+@Composable
+fun Navbar(){}

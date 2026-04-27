@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.ui.FormContent
+import com.example.drugdose.ui.theming.AppTheme
 import kotlinx.serialization.json.Json
 import kotlin.getValue
 
@@ -40,8 +41,11 @@ class Form : ComponentActivity() {
         val med = Json.decodeFromString<Medicine>(medId)
        // createAlert(medId) //alert per controindicazioni
         setContent {
-            Surface(tonalElevation = 5.dp){
-                FormContent(med, this,viewModel)}
+            AppTheme {
+                Surface(tonalElevation = 5.dp) {
+                    FormContent(med, this, viewModel)
+                }
+            }
         }
     }
 }

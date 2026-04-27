@@ -6,9 +6,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.ui.unit.dp
 import com.example.drugdose.data.Dosage
+import com.example.drugdose.ui.ResultContent
 import com.example.drugdose.ui.components.AlertBox
+import com.example.drugdose.ui.theming.AppTheme
 import kotlinx.serialization.json.Json
 import java.math.RoundingMode
 
@@ -24,43 +28,22 @@ class Result : ComponentActivity() {
             startActivity(intent)
         }
         val result = intent.getStringExtra("dose")!!
-
         //parse the result to create alert for min/max age/weight
         val args = result.split(",")
 
-
-
-        val dose = args.last()
-        val name = intent.getStringExtra("name")
-        val commercial =  Json.Default.decodeFromString<Dosage>(intent.getStringExtra("commercial")!!)
-        val n = dose.toDouble()/commercial.dose
 
 //        if(!intent.getBooleanExtra("pregnantOk",true)){
 //            txt += "Not safe during pregnancy. "
 //        }
 
         setContent {
-           if (args.dropLast(1).isNotEmpty()) {
-               AlertBox(args = args.dropLast(1))
-           }
-            Button(
-                {
-
-                    val intent = Intent(this, MainActivity::class.java)
-
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-                    startActivity(intent)
+            AppTheme {
+                Surface(tonalElevation = 5.dp) {
+                    ResultContent(args, intent, this)
                 }
-            ) {
-                Text(
-                    text = "$name$dose mg. Equivalent:" + n.toBigDecimal().setScale(
-                        1,
-                        RoundingMode.HALF_DOWN
-                    ) + " " + commercial.type + " of " + commercial.dose
-                )
+
             }
-            }
+        }
         }
 
         }

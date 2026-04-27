@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.Surface
 import androidx.compose.ui.unit.dp
 import com.example.drugdose.ui.AppContent
+import com.example.drugdose.ui.theming.AppTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -13,8 +14,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(tonalElevation = 5.dp){
-            AppContent(this, ListAct::class.java)
+            AppTheme {
+                Surface(tonalElevation = 5.dp) {
+                    AppContent(this, ListAct::class.java)
+                }
             }
 
         }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -33,7 +34,9 @@ fun DoseMain(activity : Activity, nextClass : Class<*>){
    Text(text = "What's your dose?")
     Spacer(modifier = Modifier
         .height(15.dp))
-       Button(onClick = {
+       Button(
+           shape = CircleShape,
+           onClick = {
            switchAct(activity, nextClass)
        })
        {

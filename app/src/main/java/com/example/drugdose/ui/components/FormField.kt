@@ -35,9 +35,10 @@ fun FormField(
 }
 //fix this method
 fun validateInput(state : TextFieldState, label : String) : Boolean{
-    return if (label == "Age"){
-        (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 110)
-    }else {
-        (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 250)
-    }
+    return if(state.text == "") false else
+        if (label == "Age"){
+            (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 110)
+        }else {
+            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 210)
+        }
 }

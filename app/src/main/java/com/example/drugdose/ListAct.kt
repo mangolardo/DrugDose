@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.drugdose.ui.MedList
+import com.example.drugdose.ui.theming.AppTheme
 
 //is activity
 class ListAct : ComponentActivity() {
@@ -39,13 +40,15 @@ class ListAct : ComponentActivity() {
             //val uiState by viewModel.uistate.collectAsStateWithLifecycle()
 
             val medLazyListState = rememberLazyListState()
-            Surface(tonalElevation = 5.dp) {
+            AppTheme {
+                Surface(tonalElevation = 5.dp) {
 
-                MedList(
-                    json = this.assets.open("medsJson.json"),
-                    action = { medId -> switchToForm(this, medId) },
-                    state = medLazyListState
-                )
+                    MedList(
+                        json = this.assets.open("medsJson.json"),
+                        action = { medId -> switchToForm(this, medId) },
+                        state = medLazyListState
+                    )
+                }
             }
         }
         }
