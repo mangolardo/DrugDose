@@ -33,4 +33,401 @@
     }],
     "alerts" : [],
   "pregnantOk" : true
-}]
+},
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Amikacin",
+    "unit" : "kg",
+    "mgPerUnit" : 20.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 1555.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    },
+      {
+        "type" : "tabs" ,
+        "dose" : 600
+      }],
+    "alerts" : ["..."],
+    "pregnantOk" : true
+  },
+  {
+    "name": "Medicina",
+    "unit" : "m2",
+    "mgPerUnit" : 3.0,
+    "maxAge" : 90,
+    "minAge" : 2,
+    "maxWeight" : 99.6,
+    "minWeight" : 3.5,
+    "maxDose": 15.0,
+    "dosages" : [{
+      "type" : "tabs" ,
+      "dose" : 400
+    }],
+    "alerts" : [],
+    "pregnantOk" : true
+  }
+]

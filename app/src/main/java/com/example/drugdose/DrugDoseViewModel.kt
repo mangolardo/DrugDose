@@ -1,15 +1,4 @@
-package com.example.drugdose.ui
-
-import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.ViewModel
-import com.example.drugdose.data.Medicine
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-import com.example.drugdose.data.*
-import java.io.File
+package com.example.drugdose
 
 //maybe reuse for form viewmodel instead of list???
 //class DrugDoseViewModel(meds : List<Medicine>) : ViewModel(){
@@ -33,4 +22,4 @@ import java.io.File
 //)
 
 //ui state for navigation, form values to remember
-//might just use remember mutablestateof tbh
+//

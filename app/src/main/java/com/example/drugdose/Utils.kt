@@ -1,4 +1,4 @@
-package com.example.drugdose.ui
+package com.example.drugdose
 
 import android.app.Activity
 import android.content.Intent
