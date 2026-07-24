@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.drugdose.ui.AppContent
 import com.example.drugdose.ui.theming.AppTheme
 
@@ -15,36 +19,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                Surface(tonalElevation = 5.dp) {
-                    AppContent(this, ListAct::class.java)
-                }
+              AppNav()
             }
 
         }
     }
 }
-//@Composable
-//fun AppContent(activity : Activity, nextClass : Class<*> ){
-//    Column(
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//        verticalArrangement = Arrangement.Center,
-//        modifier = Modifier
-//            .fillMaxSize()
-//    ) {
-//        DoseMain(activity,nextClass)
-//    }
-////add navigation routes for navbar
-//}
-//
-//@Composable
-//fun DoseMain(activity : Activity, nextClass : Class<*>){
-//    Text(text = "What's your dose?")
-//    Button(onClick = {
-//        switchAct(activity, nextClass)
-//    })
-//    {
-//        Text(
-//            text = "+"
-//        )
-//    }
-//}
+
+@Composable
+fun AppNav() {
+    val navControl = rememberNavController()
+    NavHost(
+        navController = navControl,
+        startDestination = "DoseMain"
+    ){
+        composable("DoseMain")
+        composable("ListContent")
+        composable("Info")
+        composable("Profiles")
+        composable("Form")
+        composable("Result")
+
+    }
+}

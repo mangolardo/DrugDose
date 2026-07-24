@@ -16,33 +16,28 @@ import androidx.compose.ui.unit.dp
 import com.example.drugdose.switchAct
 
 @Composable
-fun AppContent(activity : Activity, nextClass : Class<*> ){
+fun DoseMain(activity : Activity, nextClass : Class<*>){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxSize()
     ) {
-        DoseMain(activity,nextClass)
+        Text(text = "What's your dose?")
+        Spacer(
+            modifier = Modifier
+                .height(15.dp)
+        )
+        Button(
+            shape = CircleShape,
+            onClick = {
+                switchAct(activity, nextClass)
+            })
+        {
+            Text(
+                text = "+"
+            )
+        }
     }
-//add navigation routes for navbar
-}
-
-@Composable
-fun DoseMain(activity : Activity, nextClass : Class<*>){
-
-   Text(text = "What's your dose?")
-    Spacer(modifier = Modifier
-        .height(15.dp))
-       Button(
-           shape = CircleShape,
-           onClick = {
-           switchAct(activity, nextClass)
-       })
-       {
-           Text(
-               text = "+"
-           )
-       }
    }
 

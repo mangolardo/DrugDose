@@ -30,7 +30,6 @@ fun FormContent(med : Medicine, activity : ComponentActivity, viewModel: Form.fo
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp),
-
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)
