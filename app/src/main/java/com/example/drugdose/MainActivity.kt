@@ -10,7 +10,7 @@ import com.example.drugdose.ui.theming.AppTheme
 
 class MainActivity : ComponentActivity() {
 
-    //plus button sequence : main -> list -> form (keep stack until here) -> if conflict {alert} else >(handle back button to main) result (return to main {flag activity clear top?})
+    //plus button sequence : main -> list of profiles -> if new profile {form} -> medicine list ->  if conflict {alert} else >(handle back button to main) result (return to main {flag activity clear top?})
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
