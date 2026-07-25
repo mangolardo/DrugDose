@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -37,6 +38,16 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 
+@Composable
+fun ListMed(toResult:Boolean, ontoResult:()->Unit){
+//use query to room db for medlist
+    val medLazyListState = rememberLazyListState()
+    MedListContent(
+        json = this.assets.open("medsJson.json"),
+        action = { medId -> switchToForm(this, medId) },
+        state = medLazyListState
+    )
+}
 @Composable
 fun MedListContent(
     json : InputStream,

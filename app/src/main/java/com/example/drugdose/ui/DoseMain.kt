@@ -13,10 +13,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.drugdose.switchAct
+import com.example.drugdose.ui.components.NavBar
 
 @Composable
-fun DoseMain(activity : Activity, nextClass : Class<*>){
+fun DoseMain(
+    plusAction: () -> Unit,
+    onProfiles: () -> Unit,
+    onInfo: () -> Unit,
+    onMeds: () -> Unit
+
+){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -31,13 +37,18 @@ fun DoseMain(activity : Activity, nextClass : Class<*>){
         Button(
             shape = CircleShape,
             onClick = {
-                switchAct(activity, nextClass)
+                plusAction()
             })
         {
             Text(
                 text = "+"
             )
         }
+        NavBar(
+            onProfiles = onProfiles,
+        onInfo= onInfo,
+        onMeds= onMeds
+        )
     }
    }
 

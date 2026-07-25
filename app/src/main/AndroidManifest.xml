@@ -12,22 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrugDose">
         <activity
-            android:name=".Info"
-            android:exported="false" />
-        <activity
-            android:name=".Profiles"
-            android:exported="false" />
-        <activity
-            android:name=".Result"
-            android:exported="false" />
-        <activity
-            android:name=".Form"
-            android:exported="false" />
-        <activity
-            android:name=".ListMed"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.drugdose.MainActivity
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.ui.components.AlertBox
 import kotlinx.serialization.json.Json
@@ -25,6 +24,19 @@ import java.math.RoundingMode
 
 @Composable
 fun ResultContent(args: List<String>, intent : Intent, activity : ComponentActivity) {
+    val result = calculateDose(fields, med)
+    val converted = Json.Default.encodeToString(
+        convertToCommercial(
+            result.split(",").last().toDouble(), med
+        )
+    )
+
+    // switchAct(activity,Result::class.java)
+    val intent = Intent(activity, Result::class.java)
+    intent.putExtra("commercial", converted)
+    intent.putExtra("dose", result)
+    intent.putExtra("name", med.name)
+//                    intent.putExtra("pregnantOk", med.pregnantOk )
     val dose = args.last().toFloat()
     val name = intent.getStringExtra("name")
     val commercial =  Json.Default.decodeFromString<Dosage>(intent.getStringExtra("commercial")!!)

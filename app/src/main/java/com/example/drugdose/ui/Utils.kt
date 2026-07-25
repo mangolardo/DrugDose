@@ -1,4 +1,4 @@
-package com.example.drugdose
+package com.example.drugdose.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -8,15 +8,7 @@ import kotlin.math.abs
 import kotlin.math.sqrt
 
 //write utils to parse and search JSON
-    fun  switchAct(activity : Activity, nextClass : Class<*>){
-        val intent = Intent(activity, nextClass)
-        activity.startActivity(intent)
-    }
-fun switchToForm(activity : Activity, medId : String){
-    val intent = Intent(activity, Form::class.java)
-    intent.putExtra("MedId", medId)
-    activity.startActivity(intent)
-}
+
 //assuming dose is in milligrams
 fun calculateDose (fields : Map<String,String>, medObj : Medicine ):String {
 //check for max dose
