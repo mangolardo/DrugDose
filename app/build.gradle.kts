@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.ksp)
     id("org.jetbrains.kotlin.plugin.serialization")  version "2.3.20"
 
 }
@@ -47,9 +48,10 @@ composeCompiler {
     stabilityConfigurationFiles.addAll(rootProject.layout.projectDirectory.file("stability_config.conf"))
 }
 dependencies {
-    dependencies {
 
-        val composeBom = platform("androidx.compose:compose-bom:2026.03.00")
+
+    implementation(libs.androidx.room3.compiler)
+    val composeBom = platform("androidx.compose:compose-bom:2026.03.00")
         implementation(composeBom)
         androidTestImplementation(composeBom)
 
@@ -76,7 +78,7 @@ dependencies {
         // Optional - Integration with RxJava
         //implementation("androidx.compose.runtime:runtime-rxjava2")
 
-    }
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -90,5 +92,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 
 }

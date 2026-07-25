@@ -2,7 +2,9 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.compose.compiler) apply false
+
     id("org.jetbrains.kotlin.plugin.serialization")  version "2.3.20" apply false
+
 }
 
 
