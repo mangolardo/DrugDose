@@ -16,6 +16,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -26,33 +30,14 @@ import com.example.drugdose.ui.theming.AppTheme
 import kotlinx.serialization.json.Json
 import kotlin.getValue
 @Composable
-fun Form(toMedList:Boolean, ontoMedList: () -> Unit) {
+fun Form(toMedList:Boolean, ontoMedList: () -> Unit, uiState : UiState) {
+//might need to make viewmodel fields for the form
+    val ageState = TextFieldState()
+    val weightState  = TextFieldState()
+    val heightState = TextFieldState()
+    val med = uiState.selectedMed
+        // createAlert(medId) //alert per controindicazioni
 
-//    class formViewModel : ViewModel() {
-//        val ageState = TextFieldState()
-//        val weightState = TextFieldState()
-//        val heightState = TextFieldState()
-//    }
-//
-//    private val viewModel: formViewModel by viewModels()
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        //val activity = this
-//        val medId = intent.getStringExtra("MedId")!!
-//        val med = Json.decodeFromString<Medicine>(medId)
-//        // createAlert(medId) //alert per controindicazioni
-//        setContent {
-//            AppTheme {
-//                Surface(tonalElevation = 5.dp) {
-//                    FormContent(med, this, viewModel)
-//                }
-//            }
-//        }
-//    }
-}
-@Composable
-fun FormContent(med : Medicine, activity : ComponentActivity, viewModel: Form.formViewModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -60,13 +45,11 @@ fun FormContent(med : Medicine, activity : ComponentActivity, viewModel: Form.fo
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        Text(text = "Form for " + med.name)
-        val weightState = viewModel.weightState
+        Text(text = "Form for " + med!!.name)
         FormField(
             state = weightState,
             label = "Weight(kg)"
         )
-        val heightState = viewModel.heightState
         FormField(
             state = heightState,
             label = "Height(cm)"

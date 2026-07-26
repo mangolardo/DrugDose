@@ -31,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.R
 import com.example.drugdose.data.Medicine
 import kotlinx.coroutines.Dispatchers
@@ -47,11 +48,9 @@ fun ListMed(
 
 ){
     val state = rememberLazyListState()
-    var list by remember { mutableStateOf<List<Medicine>>(emptyList()) }
-    LaunchedEffect(Unit) {
+    val list by uiState.meds.collectAsStateWithLifecycle(initialValue = emptyList())
 
-    val list = uiState.meds
-    }
+
 
         LazyColumn(
             state = state,

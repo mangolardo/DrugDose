@@ -76,23 +76,19 @@ fun AppNav(uiS : UiState) {
         composable("ProfilesToMeds") {
             Profiles(
                 uiState = uiS,
-                toMedList = true,
                 clickAct = { navControl.navigate("MedList") },
-                onNew = { navControl.navigate("FormToMeds") },
-                isEdit = false,
+                onNew = { navControl.navigate("FormToMeds") }
             )
         }
         composable("Profiles") {
             Profiles(
                 uiState = uiS,
-                toMedList = false,
                 clickAct = { navControl.navigate("ProfileDetail")},
-                onNew = { navControl.navigate("Form") },
-                isEdit = false
+                onNew = { navControl.navigate("Form") }
             )
         }
         composable("ProfileDetail") {
-            profileDetail()
+            ProfileDetail()
         }
 
         composable("Result") {

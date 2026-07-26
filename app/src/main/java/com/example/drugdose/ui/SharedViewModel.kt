@@ -13,23 +13,15 @@ import kotlinx.coroutines.launch
 
 class SharedViewModel(val repo : AppRepo) : ViewModel() {
 
-    val uiState = MutableStateFlow(UiState())
+    val uiState = MutableStateFlow(UiState(profiles =  repo.profiles,
+        meds = repo.medicines))
     val _uiState: StateFlow<UiState> = uiState
     fun selectProfile(profile: Profile){
-        uiState.value = UiState(selectedProfile = profile)
+        uiState.value = uiState.value.copy(selectedProfile = profile,selectedMed = null)
     }
-    init {
-        initialize()
-    }
+
     //room queries
-    fun initialize(){
-        viewModelScope.launch {
-            uiState.value = UiState(
-            profiles =  repo.profiles,
-            meds = repo.medicines
-            )
-        }
-    }
+
 
     fun selectMed(med: Medicine){
         uiState.value = uiState.value.copy(selectedMed = med)
@@ -40,13 +32,16 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
 
     }
     fun resetUi(){
-        uiState.value = UiState()
+        uiState.value = UiState(
+            profiles =  repo.profiles,
+            meds = repo.medicines
+        )
 
     }
 }
 data class UiState(
-    val profiles : Flow<List<Profile>> ? = null,
-    val meds : Flow<List<Medicine> > ? = null,
+    val profiles : Flow<List<Profile>> ,
+    val meds : Flow<List<Medicine>> ,
     val selectedProfile : Profile? = null,
     val selectedMed : Medicine? = null,
     val calculatedDose : Bundle? = null
