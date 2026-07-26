@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.ksp)
+    id("com.google.devtools.ksp")
     id("org.jetbrains.kotlin.plugin.serialization")  version "2.3.20"
 
 }
@@ -48,10 +48,22 @@ composeCompiler {
     stabilityConfigurationFiles.addAll(rootProject.layout.projectDirectory.file("stability_config.conf"))
 }
 dependencies {
-
-
-    implementation(libs.androidx.room3.compiler)
+    val room_version = "2.8.4"
     val composeBom = platform("androidx.compose:compose-bom:2026.03.00")
+    implementation("androidx.room:room-runtime:$room_version")
+
+    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
+    // See Add the KSP plugin to your project
+    ksp("androidx.room:room-compiler:$room_version")
+
+    // If this project only uses Java source, use the Java annotationProcessor
+    // No additional plugins are necessary
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+
         implementation(composeBom)
         androidTestImplementation(composeBom)
 
@@ -73,10 +85,6 @@ dependencies {
         implementation("androidx.activity:activity-compose:1.13.0")
         // Optional - Integration with ViewModels
         implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
-        // Optional - Integration with LiveData
-       // implementation("androidx.compose.runtime:runtime-livedata")
-        // Optional - Integration with RxJava
-        //implementation("androidx.compose.runtime:runtime-rxjava2")
 
 
 
