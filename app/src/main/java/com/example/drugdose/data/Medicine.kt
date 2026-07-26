@@ -1,10 +1,14 @@
 package com.example.drugdose.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
 
-@Serializable
+@Entity(tableName = "Medicines")
 data class Medicine(
+    @PrimaryKey(autoGenerate = true)
+    val id : Int,
     val name : String,
     val unit : String = "",
     val mgPerUnit : Double,

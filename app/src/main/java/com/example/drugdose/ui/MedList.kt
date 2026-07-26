@@ -38,42 +38,21 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import java.io.InputStream
 
-@Composable
-fun ListMed(toResult:Boolean, ontoResult:()->Unit){
-//use query to room db for medlist
-    val medLazyListState = rememberLazyListState()
-    MedListContent(
-        json = this.assets.open("medsJson.json"),
-        action = { medId -> switchToForm(this, medId) },
-        state = medLazyListState
-    )
-}
-@Composable
-fun MedListContent(
-    json : InputStream,
-    action : (String) -> Unit ={},
-    state : LazyListState
-){
-    var list by remember { mutableStateOf<List<Medicine>>(emptyList()) }
-    var isLoading by remember { mutableStateOf(true)}
-    LaunchedEffect(Unit) {
-    val file = withContext(Dispatchers.IO){
-       json.bufferedReader().use { it.readText()}
 
-        }
-        isLoading = false
-       // (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
-   list = Json.decodeFromString<List<Medicine>>(file)
+@Composable
+fun ListMed(
+    toResult: Boolean,
+    ontoResult: () -> Unit,
+    uiState : UiState
+
+){
+    val state = rememberLazyListState()
+    var list by remember { mutableStateOf<List<Medicine>>(emptyList()) }
+    LaunchedEffect(Unit) {
+
+    val list = uiState.meds
     }
-    if(isLoading){
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
-    }
-    else {
+
         LazyColumn(
             state = state,
             modifier = Modifier
@@ -83,22 +62,22 @@ fun MedListContent(
             contentPadding = PaddingValues(10.dp)
         ) {
             items(items = list) { med ->
-                MedListItem(med = med) { medId -> action(medId) }
+                MedListItem(med = med, toResult = toResult) { ontoResult() }
             }
         }
     }
-}
 @Composable
 fun MedListItem (
     med : Medicine,
-    action : (String) -> Unit
-    //implementable onClick action
+    toResult: Boolean,
+    action : () -> Unit
 )
 {
+
  Card( shape = RectangleShape,
      modifier = Modifier
      .fillMaxWidth()
-     .clickable { action(Json.encodeToString(med)) }
+     .clickable(enabled = toResult) { action() }
  )
  {
      Row( modifier = Modifier.fillMaxWidth(),
