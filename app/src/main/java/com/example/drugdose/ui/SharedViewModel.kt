@@ -1,6 +1,7 @@
 package com.example.drugdose.ui
 
 import android.os.Bundle
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.drugdose.data.AppRepo
@@ -38,11 +39,22 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
         )
 
     }
+    fun addProfile(profile: Profile){
+        //fields checks
+        viewModelScope.launch {
+            repo.insertProfile(profile)
+        }
+    }
+
+    fun setDose(dose: Double){
+        uiState.value = uiState.value.copy(calculatedDose = dose)
+    }
 }
 data class UiState(
     val profiles : Flow<List<Profile>> ,
     val meds : Flow<List<Medicine>> ,
     val selectedProfile : Profile? = null,
     val selectedMed : Medicine? = null,
-    val calculatedDose : Bundle? = null
+    val calculatedDose : Double? = null,
+    val isAlert : Boolean = false
 )

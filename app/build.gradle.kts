@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     id("com.google.devtools.ksp")
-    id("org.jetbrains.kotlin.plugin.serialization")  version "2.3.20"
+    id("org.jetbrains.kotlin.plugin.serialization")  version "2.4.10"
 
 }
 
@@ -64,27 +64,27 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
 
-        implementation(composeBom)
-        androidTestImplementation(composeBom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
 
         // Choose one of the following:
         // Material Design 3
-        implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3")
         // Android Studio Preview support
-        implementation("androidx.compose.ui:ui-tooling-preview")
-        debugImplementation("androidx.compose.ui:ui-tooling")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    debugImplementation("androidx.compose.ui:ui-tooling")
 
         // UI Tests
-        androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-        debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
         // Optional - Add window size utils
-        implementation("androidx.compose.material3.adaptive:adaptive")
+    implementation("androidx.compose.material3.adaptive:adaptive")
 
         // Optional - Integration with activities
-        implementation("androidx.activity:activity-compose:1.13.0")
+    implementation("androidx.activity:activity-compose:1.13.0")
         // Optional - Integration with ViewModels
-        implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
 
 
 

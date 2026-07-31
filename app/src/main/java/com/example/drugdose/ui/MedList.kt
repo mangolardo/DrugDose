@@ -6,24 +6,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
@@ -34,17 +27,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.R
 import com.example.drugdose.data.Medicine
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
-import java.io.InputStream
 
 
 @Composable
 fun ListMed(
     toResult: Boolean,
     ontoResult: () -> Unit,
-    uiState : UiState
+    uiState: UiState,
+    viewModel: SharedViewModel
 
 ){
     val state = rememberLazyListState()
@@ -61,6 +51,8 @@ fun ListMed(
             contentPadding = PaddingValues(10.dp)
         ) {
             items(items = list) { med ->
+                viewModel.resetMed()
+                viewModel.selectMed(med)
                 MedListItem(med = med, toResult = toResult) { ontoResult() }
             }
         }

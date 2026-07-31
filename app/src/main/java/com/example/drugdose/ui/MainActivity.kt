@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(5.dp)
                         )
                     {
-                        AppNav(uiState)
+                        AppNav(uiState,viewModel)
                     }
 
                 }
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun AppNav(uiS : UiState) {
+fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
     val navControl = rememberNavController()
     NavHost(
         navController = navControl,
@@ -65,10 +65,10 @@ fun AppNav(uiS : UiState) {
             )
         }
         composable("MedList") {
-            ListMed(toResult = false, ontoResult = {}, uiState = uiS)
+            ListMed(toResult = false, ontoResult = {}, uiState = uiS, viewModel= viewModel )
         }
         composable("MedListToResult") {
-            ListMed(toResult = true, ontoResult = { navControl.navigate("Result") }, uiState = uiS)
+            ListMed(toResult = true, ontoResult = { navControl.navigate("Result") }, uiState = uiS,viewModel= viewModel)
         }
         composable("Info") {
             Info()
@@ -77,28 +77,33 @@ fun AppNav(uiS : UiState) {
             Profiles(
                 uiState = uiS,
                 clickAct = { navControl.navigate("MedList") },
-                onNew = { navControl.navigate("FormToMeds") }
+                onNew = { navControl.navigate("FormToMeds") },
+                viewModel= viewModel
             )
         }
         composable("Profiles") {
             Profiles(
-                uiState = uiS,
                 clickAct = { navControl.navigate("ProfileDetail")},
-                onNew = { navControl.navigate("Form") }
+                onNew = { navControl.navigate("Form") },
+                uiState = uiS,
+                viewModel= viewModel
             )
         }
         composable("ProfileDetail") {
-            ProfileDetail()
+            ProfileDetail(viewModel= viewModel)
         }
 
         composable("Result") {
-            Result()
+            Result(
+                viewModel = viewModel,
+                uiState = uiS
+            )
         }
         composable("FormToMeds") {
-            Form(toMedList = true, ontoMedList = { navControl.navigate("MedList") })
+            Form(toMedList = true, clickAct = { navControl.navigate("MedList") },uiS,  viewModel= viewModel)
         }
         composable("Form") {
-            Form(toMedList = false, ontoMedList = {})
+            Form(toMedList = false, clickAct = { navControl.popBackStack()}, uiS, viewModel= viewModel)
         }
 
     }

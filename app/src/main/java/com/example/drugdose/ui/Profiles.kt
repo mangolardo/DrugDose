@@ -33,7 +33,8 @@ import com.example.drugdose.data.Profile
 fun Profiles(
     clickAct: () -> Unit,
     onNew: () -> Unit,
-    uiState: UiState
+    uiState: UiState,
+    viewModel: SharedViewModel
 ){
     val state = rememberLazyListState()
     val list by uiState.profiles.collectAsStateWithLifecycle(initialValue = emptyList())
@@ -46,7 +47,11 @@ fun Profiles(
         contentPadding = PaddingValues(10.dp)
     ) {
         items(items = list) { profile ->
-           ProfileItem(profile = profile) { clickAct() }
+            viewModel.resetUi()
+            viewModel.selectProfile(profile)
+           ProfileItem(profile = profile) {
+               clickAct()
+           }
         }
     }
 

@@ -4,38 +4,28 @@ import android.app.Activity
 import android.content.Intent
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.Medicine
+import com.example.drugdose.data.Profile
 import kotlin.math.abs
 import kotlin.math.sqrt
 
 //write utils to parse and search JSON
 
 //assuming dose is in milligrams
-fun calculateDose (fields : Map<String,String>, medObj : Medicine ):String {
+fun calculateDose (profile: Profile, medObj : Medicine ):Double {
 //check for max dose
 
     //check min/max age,weight
-    val result = mutableListOf<String>()
-    val age = fields.getValue("Age")
-    val weight = fields.getValue("Weight")
-    val height = fields.getValue("Height")
+    val age = profile.age
+    val weight = profile.weight
+    val height = profile.height
     var dose  : Double
-
-    if(age.toInt() > medObj.maxAge){
-        result.add("MaxAge")
-    } else if(age.toInt() < medObj.minAge) {result.add("MinAge")}
-    if(weight.toDouble() > medObj.maxWeight){
-        result.add("MaxWeight")
-    } else if(weight.toDouble() < medObj.minWeight) {result.add("MinWeight")}
 
     if(medObj.unit == "kg"){
         dose = calculateOnKg(medObj.mgPerUnit,weight.toDouble())
     } else {
         dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())}
 
-    if(medObj.maxDose != null && dose > medObj.maxDose) { dose = medObj.maxDose}
-    result.add(dose.toString())
-
-    return result.joinToString(",")
+   return dose
 }
 fun calculateOnKg(dose : Double, w : Double) : Double {
 return dose*w

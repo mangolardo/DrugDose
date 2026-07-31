@@ -20,7 +20,6 @@ data class Medicine(
     val maxDose : Double? ,
     val dosages : List<Dosage>,
     //Unit,Double
-    val alerts : List<String>?,//diff types of restrictions : pathologies, incompatibility
     val pregnantOk : Boolean?
 
 )
