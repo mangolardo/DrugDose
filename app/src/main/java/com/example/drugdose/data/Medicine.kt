@@ -10,16 +10,14 @@ data class Medicine(
     @PrimaryKey(autoGenerate = true)
     val id : Int,
     val name : String,
-    val unit : String = "",
+    val unit : Unit,
     val mgPerUnit : Double,
     val maxAge : Int,
     val minAge : Int,
     val maxWeight : Double,
     val minWeight : Double,
-    //maybe make class for unit?? /m2 or /kg
-    val maxDose : Double? ,
+    val maxDose : Double?,
     val dosages : List<Dosage>,
-    //Unit,Double
     val pregnantOk : Boolean?
 
 )

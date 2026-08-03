@@ -5,6 +5,7 @@ import android.content.Intent
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.data.Profile
+import com.example.drugdose.data.Unit
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -19,13 +20,16 @@ fun calculateDose (profile: Profile, medObj : Medicine ):Double {
     val weight = profile.weight
     val height = profile.height
     var dose  : Double
-
-    if(medObj.unit == "kg"){
-        dose = calculateOnKg(medObj.mgPerUnit,weight.toDouble())
+    if(medObj.unit == Unit.KG){
+      dose =   calculateOnKg(medObj.mgPerUnit,weight.toDouble())
+    }
+    else if(medObj.unit == Unit.M2) {
+        dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())
     } else {
-        dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())}
+        throw Exception("wrong med format")
+    }
 
-   return dose
+    return dose
 }
 fun calculateOnKg(dose : Double, w : Double) : Double {
 return dose*w

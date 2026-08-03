@@ -38,6 +38,7 @@ fun ListMed(
 
 ){
     val state = rememberLazyListState()
+
     val list by uiState.meds.collectAsStateWithLifecycle(initialValue = emptyList())
 
 
