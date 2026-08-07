@@ -2,10 +2,10 @@ package com.example.drugdose.ui
 
 import android.app.Activity
 import android.content.Intent
+import androidx.compose.foundation.text.input.TextFieldState
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.data.Profile
-import com.example.drugdose.data.Unit
 import kotlin.math.abs
 import kotlin.math.sqrt
 
@@ -20,10 +20,10 @@ fun calculateDose (profile: Profile, medObj : Medicine ):Double {
     val weight = profile.weight
     val height = profile.height
     var dose  : Double
-    if(medObj.unit == Unit.KG){
+    if(medObj.unit == "kg"){
       dose =   calculateOnKg(medObj.mgPerUnit,weight.toDouble())
     }
-    else if(medObj.unit == Unit.M2) {
+    else if(medObj.unit == "m2") {
         dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())
     } else {
         throw Exception("wrong med format")
@@ -54,3 +54,13 @@ fun convertToCommercial(dose : Double, med : Medicine):Dosage{
     return closest
 }
 //method do convert dose in actual commercial dosage
+fun validateInput(state : TextFieldState, label : String) : Boolean{
+    return if(state.text == "") true else
+        if (label == "Age"){
+            (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 110)
+        }else if(label.contains("Weight")){
+            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 230)
+        } else {
+            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 70 || state.text.toString().toShort() > 220)
+        }
+}

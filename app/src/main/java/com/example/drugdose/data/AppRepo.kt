@@ -1,9 +1,11 @@
 package com.example.drugdose.data
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.serialization.json.Json
 
-class AppRepo (private val dao: AppDao){
-    val medicines : Flow<List<Medicine>> = dao.getAllMeds()
+class AppRepo (private val dao: AppDao, meds : List<Medicine> ){
+    val medicines : List<Medicine> = meds
+  //  val medicines : Flow<List<Medicine>> = dao.getAllMeds()
     val profiles : Flow<List<Profile>> = dao.getAllProfiles()
 
 //    fun getMed(id : Int) {

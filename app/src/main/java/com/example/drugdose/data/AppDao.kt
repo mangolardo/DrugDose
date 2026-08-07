@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AppDao {
-    @Query("SELECT * FROM Medicines ORDER BY name ASC ")
-    fun getAllMeds() : Flow<List<Medicine>>
-    @Query("SELECT * FROM Medicines WHERE id = :id")
-    fun getMed(id:Int) : Medicine
+//    @Query("SELECT * FROM Medicines ORDER BY name ASC ")
+//    fun getAllMeds() : Flow<List<Medicine>>
+//    @Query("SELECT * FROM Medicines WHERE id = :id")
+//    fun getMed(id:Int) : Medicine
     @Query("SELECT * FROM Profiles ORDER BY name ASC")
     fun getAllProfiles() : Flow<List<Profile>>
     @Insert

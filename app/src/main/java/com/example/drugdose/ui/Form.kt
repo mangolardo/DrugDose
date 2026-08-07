@@ -1,5 +1,8 @@
 package com.example.drugdose.ui
 
+import android.annotation.SuppressLint
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +16,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,14 +25,37 @@ import com.example.drugdose.data.Profile
 import com.example.drugdose.ui.components.FormField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import com.example.drugdose.ui.components.AlertBox
+import kotlin.getValue
+
+class FormViewModel : ViewModel(){
+    val ageState = TextFieldState()
+    val weightState = TextFieldState()
+
+    val heightState = TextFieldState()
+    val nameState =  TextFieldState()
+}
 
 @Composable
-fun Form(toMedList: Boolean, clickAct: () -> Unit, uiState: UiState, viewModel: SharedViewModel) {
+fun Form(toMedList: Boolean,
+         clickAct: () -> Unit,
+         uiState: UiState,
+         viewModel: SharedViewModel
+)
+ {
 
+   val formView: FormViewModel = viewModel()
+     var isWrong by remember { mutableStateOf(false)}
 
-    val med = uiState.selectedMed
-        // createAlert(medId) //alert per controindicazioni
-
+     if(isWrong) {
+         AlertBox(
+             args = listOf("Fields are wrong"),
+             isMedWarning = false,
+             onDismiss = { isWrong = false }
+         )
+     }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -36,52 +63,52 @@ fun Form(toMedList: Boolean, clickAct: () -> Unit, uiState: UiState, viewModel: 
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        val ageState : TextFieldState = TextFieldState()
-        val weightState : TextFieldState = TextFieldState()
-        val heightState : TextFieldState = TextFieldState()
-        val nameState : TextFieldState = TextFieldState()
+        val ageState : TextFieldState = formView.ageState
+        val weightState : TextFieldState = formView.weightState
+        val heightState : TextFieldState = formView.heightState
+        val nameState : TextFieldState = formView.nameState
         val (selectedOption, onOptionSelected) = remember { mutableStateOf(false) }
 
-        Text(text = "Form for " + med!!.name)
+        Text(text = "Form ")
         //val nameState = uiState.nameState
-        FormField(
-            state = nameState,
-            label = "Name of profile"
+         FormField(
+          state = nameState,
+            label = "Name of profile",
+            isValid =  nameState.text.isEmpty()
         )
 
         //val weightState = uiState.weightState
         FormField(
             state = weightState,
-            label = "Weight(kg)"
+            label = "Weight(kg)",
+            isValid = validateInput(weightState,"Weight(kg)")
         )
 
         //val heightState = uiState.heightState
         FormField(
             state = heightState,
-            label = "Height(cm)"
+            label = "Height(cm)",
+            isValid = validateInput(heightState,"Height(cm)")
         )
        // val ageState = uiState.ageState
-        FormField(
+      FormField(
             state = ageState,
-            label = "Age"
+            label = "Age",
+           isValid = validateInput(ageState,"Age")
         )
         Column(modifier = Modifier.selectableGroup()) {
             Row() {
                 Text(text="Pregnant")
                 RadioButton(
                     selected = selectedOption ,
-                    onClick = {onOptionSelected(true)}
+                    onClick = {onOptionSelected(!selectedOption)}
                 )
             }
         }
-
-
+        val weight = weightState.text.toString()
         val name = nameState.text.toString()
-        val weight = weightState.text.toString().toShort()
-        val height = heightState.text.toString().toShort()
-        val age = ageState.text.toString().toInt()
-
-
+        val height = heightState.text.toString()
+        val age = ageState.text.toString()
 
         Button(
             //if ontoMedList save profile fields to viewmodel AND save profile to db
@@ -90,37 +117,34 @@ fun Form(toMedList: Boolean, clickAct: () -> Unit, uiState: UiState, viewModel: 
                 .fillMaxWidth(),
             shape = RoundedCornerShape(25) ,
             onClick = {
-                viewModel.resetUi()
-                val profile : Profile = Profile(
-                    name = name,
-                    age = age,
-                    weight = weight,
-                    height = height,
-                    pregnant = selectedOption
-                )
-                viewModel.addProfile(profile)
-                if(toMedList){
-                viewModel.selectProfile(profile)
+                val hasError = validateInput(ageState, "Age") ||
+                        validateInput(weightState, "Weight(kg)") ||
+                        validateInput(heightState, "Height(cm)") ||
+                        nameState.text.isEmpty()
+
+                if (!hasError) {
+                    viewModel.resetUi()
+                    val profile: Profile = Profile(
+                        name = name,
+                        age = age.toInt(),
+                        weight = weight.toShort(),
+                        height = height.toShort(),
+                        pregnant = selectedOption
+                    )
+                    viewModel.addProfile(profile)
+                    if (toMedList) {
+                        viewModel.selectProfile(profile)
+                    }
+                    clickAct()
+                } else {
+                    isWrong = true
                 }
-                clickAct()
-//            val result = calculateDose(fields, med)
-//            val converted = Json.Default.encodeToString(
-//                convertToCommercial(
-//                    result.split(",").last().toDouble(), med
-//                )
-//            )
-//
-//            // switchAct(activity,Result::class.java)
-//            val intent = Intent(activity, Result::class.java)
-//            intent.putExtra("commercial", converted)
-//            intent.putExtra("dose", result)
-//            intent.putExtra("name", med.name)
-////                    intent.putExtra("pregnantOk", med.pregnantOk )
-
-
-
-        })
-        { Text(text = "Confirm") }
+            }
+        )
+        { Text(text = "Confirm")
     }
+
+
+     }
 
 }

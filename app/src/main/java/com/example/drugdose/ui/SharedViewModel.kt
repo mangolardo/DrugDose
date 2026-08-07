@@ -35,7 +35,8 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
     fun resetUi(){
         uiState.value = UiState(
             profiles =  repo.profiles,
-            meds = repo.medicines
+            meds = repo.medicines,
+            isAlert = false
         )
 
     }
@@ -51,8 +52,8 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
     }
 }
 data class UiState(
-    val profiles : Flow<List<Profile>> ,
-    val meds : Flow<List<Medicine>> ,
+    val profiles : Flow<List<Profile>>,
+    val meds : List<Medicine>,
     val selectedProfile : Profile? = null,
     val selectedMed : Medicine? = null,
     val calculatedDose : Double? = null,

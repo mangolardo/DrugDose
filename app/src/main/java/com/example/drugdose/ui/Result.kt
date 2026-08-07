@@ -65,7 +65,7 @@ fun ResultContent(viewModel: SharedViewModel,uiState: UiState) {
 
         val n = dose / commercial.dose
         if (uiState.isAlert) {
-            AlertBox(args = alerts)
+            AlertBox(args = alerts, isMedWarning = true)
         }
         Column(
             modifier = Modifier

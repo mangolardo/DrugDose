@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -38,6 +39,7 @@ fun Profiles(
 ){
     val state = rememberLazyListState()
     val list by uiState.profiles.collectAsStateWithLifecycle(initialValue = emptyList())
+    Text(text="Profiles page")
     LazyColumn(
         state = state,
         modifier = Modifier
@@ -46,12 +48,16 @@ fun Profiles(
         verticalArrangement = Arrangement.spacedBy(2.dp),
         contentPadding = PaddingValues(10.dp)
     ) {
+
         items(items = list) { profile ->
             viewModel.resetUi()
             viewModel.selectProfile(profile)
            ProfileItem(profile = profile) {
                clickAct()
            }
+        }
+        item(){
+            Button(onNew){Text(text="New")}
         }
     }
 

@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun FormField(
     state : TextFieldState,
-    label : String
+    label : String,
+    isValid : Boolean
 ){
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
@@ -30,15 +31,7 @@ fun FormField(
         placeholder = {Text(text="Type here...")},
         shape = RoundedCornerShape(25),
         contentPadding = PaddingValues(8.dp),
-        isError = validateInput(state,label)
+        isError = isValid
     )
 }
 //fix this method
-fun validateInput(state : TextFieldState, label : String) : Boolean{
-    return if(state.text == "") false else
-        if (label == "Age"){
-            (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 110)
-        }else {
-            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 210)
-        }
-}

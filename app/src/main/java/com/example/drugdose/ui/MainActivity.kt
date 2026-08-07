@@ -18,15 +18,20 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.drugdose.data.AppDatabase
 import com.example.drugdose.data.AppRepo
+import com.example.drugdose.data.Medicine
 import com.example.drugdose.ui.theming.AppTheme
+import kotlinx.serialization.json.Json
 
 class MainActivity : ComponentActivity() {
-    val database = AppDatabase.getDataBase(this)
-    val repository = AppRepo(database.appDao())
-    val fact = SharedViewModelFactory(repository)
+
     //private  val viewModel : SharedViewModel = ViewModelProvider(this,fact)[SharedViewModel::class.java]
     //plus button sequence : main -> list of profiles -> if new profile {form} -> medicine list ->  if conflict {alert} else >(handle back button to main) result (return to main {flag activity clear top?})
     override fun onCreate(savedInstanceState: Bundle?) {
+        val file = (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
+        val list = Json.decodeFromString<List<Medicine>>(file)
+        val database = AppDatabase.getDataBase(this)
+        val repository = AppRepo(database.appDao(),list)
+        val fact = SharedViewModelFactory(repository)
         super.onCreate(savedInstanceState)
         setContent {
             val viewModel : SharedViewModel = viewModel(factory = fact)
@@ -100,7 +105,7 @@ fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
             )
         }
         composable("FormToMeds") {
-            Form(toMedList = true, clickAct = { navControl.navigate("MedList") },uiS,  viewModel= viewModel)
+            Form(toMedList = true, clickAct = { navControl.navigate("MedListToResult") },uiS,  viewModel= viewModel)
         }
         composable("Form") {
             Form(toMedList = false, clickAct = { navControl.popBackStack()}, uiS, viewModel= viewModel)

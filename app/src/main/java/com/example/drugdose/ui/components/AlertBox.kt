@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,13 +29,18 @@ import androidx.compose.ui.window.DialogProperties
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlertBox(
-    args: List<String>
+    args: List<String>,
+    isMedWarning : Boolean,
+    onDismiss: () -> Unit = {}
 ) {
     val openDialog = remember { mutableStateOf(true) }
 
     if (openDialog.value) {
         BasicAlertDialog(
-            onDismissRequest = {},
+            onDismissRequest = {
+                openDialog.value = false
+                onDismiss()
+            },
             modifier = Modifier,
             properties = DialogProperties(),
         ) {
@@ -49,23 +56,17 @@ fun AlertBox(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                      Text("This medication is not recommended to you for the following reasons : ")
-                    if (args.contains("MaxAge")) {
-                        Text("Above max age ")
-                    }
-                    if (args.contains("MinAge")) {
-                        Text("Below min age. ")
-                    }
-                    if (args.contains("MaxWeight")) {
-                        Text("Above max weight. ")
-                    }
-                    if (args.contains("MinWeight")) {
-                        Text("Below min weight. ")
+                    if (isMedWarning) {
+                        MedWarningContent(args,openDialog)
+                    } else {
+                        Text(args.toString())
                     }
                     Spacer(modifier = Modifier.height(24.dp))
-                    TextButton(
-                        onClick = { openDialog.value = false },
-                        modifier = Modifier.align(Alignment.End),
+                    Button(
+                        onClick = {
+                            openDialog.value = false
+                            onDismiss()
+                        },
                     ) {
                         Text("Confirm")
                     }
@@ -73,4 +74,24 @@ fun AlertBox(
             }
         }
     }
+}
+@Composable
+fun MedWarningContent(
+    args: List<String>,
+    openDialog: MutableState<Boolean>
+){
+    Text("This medication is not recommended to you for the following reasons : ")
+    if (args.contains("MaxAge")) {
+        Text("Above max age ")
+    }
+    if (args.contains("MinAge")) {
+        Text("Below min age. ")
+    }
+    if (args.contains("MaxWeight")) {
+        Text("Above max weight. ")
+    }
+    if (args.contains("MinWeight")) {
+        Text("Below min weight. ")
+    }
+
 }

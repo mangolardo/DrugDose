@@ -1,5 +1,6 @@
 package com.example.drugdose.ui
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.R
 import com.example.drugdose.data.Medicine
+import kotlin.collections.emptyList
 
 
 @Composable
@@ -39,7 +41,7 @@ fun ListMed(
 ){
     val state = rememberLazyListState()
 
-    val list by uiState.meds.collectAsStateWithLifecycle(initialValue = emptyList())
+    val list = uiState.meds
 
 
 
