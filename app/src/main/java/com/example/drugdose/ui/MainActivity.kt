@@ -81,7 +81,7 @@ fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
         composable("ProfilesToMeds") {
             Profiles(
                 uiState = uiS,
-                clickAct = { navControl.navigate("MedList") },
+                clickAct = { navControl.navigate("MedListToResult") },
                 onNew = { navControl.navigate("FormToMeds") },
                 viewModel= viewModel
             )
@@ -95,13 +95,14 @@ fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
             )
         }
         composable("ProfileDetail") {
-            ProfileDetail(viewModel= viewModel)
+            ProfileDetail(uiS,viewModel)
         }
 
         composable("Result") {
             Result(
                 viewModel = viewModel,
-                uiState = uiS
+                uiState = uiS,
+                onClickAct = {navControl.navigate("DoseMain")}
             )
         }
         composable("FormToMeds") {

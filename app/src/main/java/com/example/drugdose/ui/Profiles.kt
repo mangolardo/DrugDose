@@ -14,8 +14,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -29,7 +34,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.R
 import com.example.drugdose.data.Profile
 
-//is function with handleback()
 @Composable
 fun Profiles(
     clickAct: () -> Unit,
@@ -39,44 +43,51 @@ fun Profiles(
 ){
     val state = rememberLazyListState()
     val list by uiState.profiles.collectAsStateWithLifecycle(initialValue = emptyList())
-    Text(text="Profiles page")
+Scaffold(topBar = {
+    TopAppBar({Text("Profiles", style = MaterialTheme.typography.titleLargeEmphasized,)}, colors = TopAppBarColors(
+        containerColor = MaterialTheme.colorScheme.primary,
+        scrolledContainerColor = MaterialTheme.colorScheme.primary,
+        navigationIconContentColor = MaterialTheme.colorScheme.primary,
+        titleContentColor = MaterialTheme.colorScheme.inversePrimary,
+        actionIconContentColor =MaterialTheme.colorScheme.primary,
+        subtitleContentColor = MaterialTheme.colorScheme.primary
+    ))
+}){ paddingValues ->
     LazyColumn(
         state = state,
         modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-        contentPadding = PaddingValues(10.dp)
+            .fillMaxWidth().padding(paddingValues),
+        horizontalAlignment = Alignment.Start
     ) {
-
         items(items = list) { profile ->
-            viewModel.resetUi()
-            viewModel.selectProfile(profile)
-           ProfileItem(profile = profile) {
-               clickAct()
-           }
+            ProfileItem(profile = profile, viewModel) {
+                clickAct()
+            }
         }
         item(){
-            Button(onNew){Text(text="New")}
+            FloatingActionButton(onClick = onNew, modifier = Modifier.padding(vertical = 16.dp)) {
+               Text("New")
+            }
         }
     }
 
-//lazycolumn with db request for allprofiles
-    //button NEW PROFILE {on new}
-    //on click listener if toMedlist = true ontomedlist action
-    // else open profile detail, set selectedprofile
-
-
 }
+}
+
 @Composable
 fun ProfileItem(
     profile : Profile,
+    viewModel : SharedViewModel,
     clickAct: () -> Unit
+
     ){
     Card( shape = RectangleShape,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable() { clickAct() }
+            .clickable() {
+                viewModel.resetUi()
+                viewModel.selectProfile(profile)
+                clickAct() }
     )
     {
         Row( modifier = Modifier.fillMaxWidth(),
@@ -84,21 +95,21 @@ fun ProfileItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier
-                .padding(10.dp)
+                .padding(16.dp).weight(1f)
             ) {
                 Text(
                     text = profile.name,
-                    fontSize = 30.sp,
+                    style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Start
                 )
             }
             Box(
-                contentAlignment = Alignment.Center
+                modifier = Modifier.weight(1f).padding(horizontal = 16.dp),
+                contentAlignment = Alignment.CenterEnd
             ){
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                    contentDescription = null,
-                    modifier = Modifier.size(50.dp)
+                    painter = painterResource(id = R.drawable.person_40px),
+                    contentDescription = "Profile ${profile.name}",
 
                 )
 

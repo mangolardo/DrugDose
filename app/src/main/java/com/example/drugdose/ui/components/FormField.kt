@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 fun FormField(
     state : TextFieldState,
     label : String,
-    isValid : Boolean
+    isError : Boolean = false
 ){
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
@@ -31,7 +31,7 @@ fun FormField(
         placeholder = {Text(text="Type here...")},
         shape = RoundedCornerShape(25),
         contentPadding = PaddingValues(8.dp),
-        isError = isValid
+        isError = isError
     )
 }
 //fix this method

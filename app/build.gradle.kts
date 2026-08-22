@@ -48,6 +48,7 @@ composeCompiler {
     stabilityConfigurationFiles.addAll(rootProject.layout.projectDirectory.file("stability_config.conf"))
 }
 dependencies {
+    implementation(libs.material3)
     val room_version = "2.8.4"
     val composeBom = platform("androidx.compose:compose-bom:2026.03.00")
     implementation("androidx.room:room-runtime:$room_version")

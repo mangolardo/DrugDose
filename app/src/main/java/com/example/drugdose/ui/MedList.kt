@@ -31,6 +31,7 @@ import com.example.drugdose.data.Medicine
 import kotlin.collections.emptyList
 
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun ListMed(
     toResult: Boolean,
@@ -43,8 +44,6 @@ fun ListMed(
 
     val list = uiState.meds
 
-
-
         LazyColumn(
             state = state,
             modifier = Modifier
@@ -54,9 +53,7 @@ fun ListMed(
             contentPadding = PaddingValues(10.dp)
         ) {
             items(items = list) { med ->
-                viewModel.resetMed()
-                viewModel.selectMed(med)
-                MedListItem(med = med, toResult = toResult) { ontoResult() }
+                MedListItem(med = med, toResult = toResult, viewModel,uiState) { ontoResult() }
             }
         }
     }
@@ -64,14 +61,20 @@ fun ListMed(
 fun MedListItem (
     med : Medicine,
     toResult: Boolean,
+    viewModel: SharedViewModel,
+    uiState: UiState,
     action : () -> Unit
+
 )
 {
 
  Card( shape = RectangleShape,
      modifier = Modifier
      .fillMaxWidth()
-     .clickable(enabled = toResult) { action() }
+     .clickable(enabled = toResult) {
+         viewModel.resetMed()
+         viewModel.selectMed(med)
+         action() }
  )
  {
      Row( modifier = Modifier.fillMaxWidth(),

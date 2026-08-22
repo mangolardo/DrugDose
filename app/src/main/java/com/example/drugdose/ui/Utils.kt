@@ -64,3 +64,13 @@ fun validateInput(state : TextFieldState, label : String) : Boolean{
             (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 70 || state.text.toString().toShort() > 220)
         }
 }
+fun validateInputEmpty(state : TextFieldState, label : String) : Boolean{
+    return if(state.text == "") false else
+        if (label == "Age"){
+            (state.text.toString().toInt() !in 1..110)
+        }else if(label.contains("Weight")){
+            (state.text.toString().toShort() !in 1..230)
+        } else {
+            (state.text.toString().toShort() !in 71..220)
+        }
+}

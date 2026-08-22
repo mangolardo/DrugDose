@@ -12,38 +12,36 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.ui.components.AlertBox
 import kotlinx.serialization.json.Json
 import java.math.RoundingMode
 
 @Composable
-fun Result(uiState: UiState, viewModel: SharedViewModel) {
+fun Result(uiState: UiState, viewModel: SharedViewModel, onClickAct : () -> Unit ) {
 
-    val profile = uiState.selectedProfile
-    val med = uiState.selectedMed
-    //debug block
-    if(profile == null || med==null) {
-        throw Exception("profile or med not selected")
-    } else {
-        val dose = calculateDose(profile = profile, medObj = med)
-        viewModel.setDose(dose)
-    }
-                ResultContent(viewModel,uiState)
+                ResultContent(viewModel, onClickAct)
 }
 @Composable
-fun ResultContent(viewModel: SharedViewModel,uiState: UiState) {
+fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
+    val uiState by viewModel._uiState.collectAsStateWithLifecycle()
+    var isAlert = false
     val alerts = mutableListOf<String>()
     val profile = uiState.selectedProfile
     val med = uiState.selectedMed
-    var dose = uiState.calculatedDose
+    var dose : Double
     if(profile == null || med==null) {
         throw Exception("profile or med not selected")
     } else {
+         dose = calculateDose(profile = profile, medObj = med)
+
+    }
         val age = profile.age
         val weight = profile.weight
 
@@ -57,14 +55,17 @@ fun ResultContent(viewModel: SharedViewModel,uiState: UiState) {
         } else if (weight.toDouble() < med.minWeight) {
             alerts.add("MinWeight")
         }
-        val commercial  = convertToCommercial( (dose)!!, med)
+        val commercial  = convertToCommercial( (dose), med)
 
         if (med.maxDose != null && dose > med.maxDose) {
             dose = med.maxDose
         }
 
         val n = dose / commercial.dose
-        if (uiState.isAlert) {
+        if(!alerts.isEmpty()){
+          isAlert = true
+        }
+        if (isAlert) {
             AlertBox(args = alerts, isMedWarning = true)
         }
         Column(
@@ -82,8 +83,7 @@ fun ResultContent(viewModel: SharedViewModel,uiState: UiState) {
                 shape = RoundedCornerShape(25),
                 onClick =
                     {
-
-                        //return to home
+                        onClickAct()
                     }
             ) {
                 Text(
@@ -96,4 +96,3 @@ fun ResultContent(viewModel: SharedViewModel,uiState: UiState) {
             }
         }
     }
-}

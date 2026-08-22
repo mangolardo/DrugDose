@@ -1,8 +1,5 @@
 package com.example.drugdose.ui
 
-import android.annotation.SuppressLint
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.drugdose.ui.components.AlertBox
-import kotlin.getValue
 
 class FormViewModel : ViewModel(){
     val ageState = TextFieldState()
@@ -74,27 +70,27 @@ fun Form(toMedList: Boolean,
          FormField(
           state = nameState,
             label = "Name of profile",
-            isValid =  nameState.text.isEmpty()
+            isError =  nameState.text.isEmpty()
         )
 
         //val weightState = uiState.weightState
         FormField(
             state = weightState,
             label = "Weight(kg)",
-            isValid = validateInput(weightState,"Weight(kg)")
+            isError = validateInput(weightState,"Weight(kg)")
         )
 
         //val heightState = uiState.heightState
         FormField(
             state = heightState,
             label = "Height(cm)",
-            isValid = validateInput(heightState,"Height(cm)")
+            isError = validateInput(heightState,"Height(cm)")
         )
        // val ageState = uiState.ageState
       FormField(
             state = ageState,
             label = "Age",
-           isValid = validateInput(ageState,"Age")
+           isError = validateInput(ageState,"Age")
         )
         Column(modifier = Modifier.selectableGroup()) {
             Row() {

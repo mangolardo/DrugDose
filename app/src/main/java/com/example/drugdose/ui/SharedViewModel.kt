@@ -46,9 +46,18 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
             repo.insertProfile(profile)
         }
     }
+    fun updateProfile(profile: Profile){
+        //fields checks
+        viewModelScope.launch {
+            repo.updateProfile(profile)
+        }
+    }
 
     fun setDose(dose: Double){
         uiState.value = uiState.value.copy(calculatedDose = dose)
+    }
+    fun setAlert(value:Boolean){
+        uiState.value = uiState.value.copy(isAlert = value)
     }
 }
 data class UiState(
