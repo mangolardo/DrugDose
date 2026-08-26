@@ -10,6 +10,7 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,11 @@ import com.example.drugdose.ui.components.FormField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import com.example.drugdose.ui.components.AlertBox
 
@@ -32,6 +38,10 @@ class FormViewModel : ViewModel(){
 
     val heightState = TextFieldState()
     val nameState =  TextFieldState()
+    var alerts = mutableListOf<String>()
+    fun addAlert(alert : String){
+        alerts.add(alert)
+    }
 }
 
 @Composable
@@ -44,14 +54,9 @@ fun Form(toMedList: Boolean,
 
    val formView: FormViewModel = viewModel()
      var isWrong by remember { mutableStateOf(false)}
+val alerts = formView.alerts
 
-     if(isWrong) {
-         AlertBox(
-             args = listOf("Fields are wrong"),
-             isMedWarning = false,
-             onDismiss = { isWrong = false }
-         )
-     }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -64,8 +69,19 @@ fun Form(toMedList: Boolean,
         val heightState : TextFieldState = formView.heightState
         val nameState : TextFieldState = formView.nameState
         val (selectedOption, onOptionSelected) = remember { mutableStateOf(false) }
+        val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
 
-        Text(text = "Form ")
+        Text(text = "Form ", style = MaterialTheme.typography.titleLargeEmphasized, modifier = Modifier.drawBehind {
+            val strokeWidthPx = 1.dp.toPx()
+            val verticalOffset = size.height - 2.sp.toPx()
+            drawLine(
+                color = Color.Black,
+                strokeWidth = strokeWidthPx,
+                start = Offset(0f, verticalOffset),
+                end = Offset(size.width, verticalOffset),
+                pathEffect = pathEffect
+            )
+        })
         //val nameState = uiState.nameState
          FormField(
           state = nameState,
@@ -92,15 +108,18 @@ fun Form(toMedList: Boolean,
             label = "Age",
            isError = validateInput(ageState,"Age")
         )
-        Column(modifier = Modifier.selectableGroup()) {
-            Row() {
-                Text(text="Pregnant")
+        Row(horizontalArrangement = Arrangement.SpaceAround, verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
+            Column( modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = "Pregnant", style = MaterialTheme.typography.bodyLargeEmphasized)
+            }
                 RadioButton(
                     selected = selectedOption ,
                     onClick = {onOptionSelected(!selectedOption)}
                 )
             }
-        }
         val weight = weightState.text.toString()
         val name = nameState.text.toString()
         val height = heightState.text.toString()
@@ -113,10 +132,16 @@ fun Form(toMedList: Boolean,
                 .fillMaxWidth(),
             shape = RoundedCornerShape(25) ,
             onClick = {
-                val hasError = validateInput(ageState, "Age") ||
-                        validateInput(weightState, "Weight(kg)") ||
-                        validateInput(heightState, "Height(cm)") ||
-                        nameState.text.isEmpty()
+//                val hasError = validateInput(ageState, "Age") ||
+//                        validateInput(weightState, "Weight(kg)") ||
+//                        validateInput(heightState, "Height(cm)") ||
+//                        nameState.text.isEmpty()
+                if (nameState.text.isEmpty()||ageState.text.isEmpty()||heightState.text.isEmpty()||weightState.text.isEmpty())formView.addAlert("Fields can't be empty")
+                else if  (  nameState.text.length > 10)formView.addAlert("Profile name can't be longer than 10 characters")
+                if  (validateInputEmpty(ageState, "Age"))formView.addAlert("Age must be between 0-110")
+                if ( validateInputEmpty(weightState, "Weight(kg)")) formView.addAlert("Weight must be between 0-230")
+                if (  validateInputEmpty(heightState, "Height(cm)") ) formView.addAlert("Height must be between 0-220")
+                val hasError = !alerts.isEmpty()
 
                 if (!hasError) {
                     viewModel.resetUi()
@@ -142,5 +167,13 @@ fun Form(toMedList: Boolean,
 
 
      }
-
+     if(isWrong) {
+         AlertBox(
+             args = alerts,
+             isMedWarning = false,
+             onDismiss = { isWrong = false
+                 formView.alerts = mutableListOf<String>()
+             }
+         )
+     }
 }

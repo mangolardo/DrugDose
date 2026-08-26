@@ -3,6 +3,7 @@ package com.example.drugdose.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -33,14 +34,14 @@ class MainActivity : ComponentActivity() {
         val repository = AppRepo(database.appDao(),list)
         val fact = SharedViewModelFactory(repository)
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             val viewModel : SharedViewModel = viewModel(factory = fact)
             val uiState by viewModel._uiState.collectAsStateWithLifecycle()
             AppTheme {
                 Surface(){
                     Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(5.dp)
+                        horizontalAlignment = Alignment.CenterHorizontally
                         )
                     {
                         AppNav(uiState,viewModel)

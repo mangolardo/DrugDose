@@ -1,6 +1,7 @@
 package com.example.drugdose.ui
 
 import android.app.Activity
+import android.provider.CalendarContract
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.drugdose.R
 import com.example.drugdose.ui.components.NavBar
 
@@ -35,7 +41,23 @@ fun DoseMain(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        Text(text = "What's your dose?", style = MaterialTheme.typography.titleLargeEmphasized)
+        val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+        Text(
+            modifier = Modifier.drawBehind {
+                val strokeWidthPx = 1.dp.toPx()
+                val verticalOffset = size.height - 2.sp.toPx()
+                drawLine(
+                    color = Color.Black,
+                    strokeWidth = strokeWidthPx,
+                    start = Offset(0f, verticalOffset),
+                    end = Offset(size.width, verticalOffset),
+                    pathEffect = pathEffect
+                )
+            },
+            text = "What's your dose?",
+            style = MaterialTheme.typography.titleLargeEmphasized
+        )
+//        Text(text = "What's your dose?", style = MaterialTheme.typography.titleLargeEmphasized)
         Spacer(
             modifier = Modifier
                 .height(15.dp)
@@ -43,7 +65,7 @@ fun DoseMain(
         FloatingActionButton(onClick = plusAction) {
             Icon(
                 painterResource(id = R.drawable.add_40px),
-                contentDescription = "Medicine List"
+                contentDescription = "Start"
             )
         }
 
@@ -59,7 +81,7 @@ fun DoseMain(
             onInfo= onInfo,
             onMeds= onMeds
         )
-        Spacer(Modifier.size(48.dp))
+        Spacer(Modifier.size(32.dp))
     }
    }
 

@@ -1,6 +1,7 @@
 package com.example.drugdose.ui
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -13,13 +14,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -45,12 +49,12 @@ import com.example.drugdose.R
 import com.example.drugdose.ui.components.AlertBox
 
 class EditViewModel : ViewModel(){
-    val ageState = TextFieldState()
-    val weightState = TextFieldState()
+    var ageState = TextFieldState()
+    var weightState = TextFieldState()
 
-    val heightState = TextFieldState()
-    val nameState =  TextFieldState()
-    val alerts = mutableListOf<String>()
+    var heightState = TextFieldState()
+    var nameState =  TextFieldState()
+    var alerts = mutableListOf<String>()
     fun addAlert(alert : String){
         alerts.add(alert)
     }
@@ -78,12 +82,12 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
             topBar = {
                 TopAppBar(
                 {InputEdit(nameState,profile.name, false)}, colors = TopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        scrolledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        navigationIconContentColor = MaterialTheme.colorScheme.surfaceVariant,
-                        titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        actionIconContentColor =MaterialTheme.colorScheme.surfaceVariant,
-                        subtitleContentColor = MaterialTheme.colorScheme.surfaceVariant
+                        containerColor = Color.Transparent,
+                        scrolledContainerColor = Color.Transparent,
+                        navigationIconContentColor = Color.Transparent,
+                        titleContentColor = MaterialTheme.colorScheme.scrim,
+                        actionIconContentColor =Color.Transparent,
+                        subtitleContentColor = Color.Transparent
                     ),
                 actions = {
                     IconButton({
@@ -120,17 +124,25 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                     }
                     ) {
                         Icon(
-                            painterResource(id= R.drawable.check_40px), "Save",tint= MaterialTheme.colorScheme.onSurfaceVariant)
+                            painterResource(id= R.drawable.check_40px), "Save",tint= MaterialTheme.colorScheme.primaryContainer)
                     }
-                    IconButton({isEdit = false}) {
+                    IconButton({
+                        editViewModel.ageState = TextFieldState("")
+                        editViewModel.weightState = TextFieldState("")
+                        editViewModel.heightState = TextFieldState("")
+                        editViewModel.nameState = TextFieldState("")
+                        isPreg = profile.pregnant
+                        isEdit = false
+                    }) {
                         Icon(
-                            painterResource(id= R.drawable.close_40px), "Cancel",tint= MaterialTheme.colorScheme.onSurfaceVariant)
+                            painterResource(id= R.drawable.close_40px), "Cancel",tint= MaterialTheme.colorScheme.primaryContainer)
                     }
                 }
             ) },
             contentWindowInsets = WindowInsets(16.dp,16.dp,16.dp,16.dp)
         )
         { padding ->
+            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = Color.Black)
             LazyColumn(
                 Modifier.padding(padding),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -146,6 +158,7 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceAround,
+                        verticalAlignment = Alignment.CenterVertically
                     ){
                         Column( modifier = Modifier.weight(1f),
                             horizontalAlignment = Alignment.Start,
@@ -153,14 +166,13 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                         ){
                             Text("Pregnant?",Modifier.padding(vertical=16.dp), style = MaterialTheme.typography.bodyLargeEmphasized)
                         }
-                        Column( modifier = Modifier.weight(1f),
-                            horizontalAlignment = Alignment.End
-                        ){
+
                             RadioButton(
+                                modifier = Modifier.size(20.dp),
                                 selected = isPreg, enabled = true,
                                 onClick = { isPreg = !isPreg}
                             )
-                        }
+
                     }
                 }
 
@@ -173,24 +185,26 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
             topBar = {TopAppBar(
                 {Text(profile.name, textAlign = TextAlign.Start)},
                 colors = TopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    scrolledContainerColor = MaterialTheme.colorScheme.primary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.inversePrimary,
-                    actionIconContentColor =MaterialTheme.colorScheme.primary,
-                    subtitleContentColor = MaterialTheme.colorScheme.primary
+                    containerColor = Color.Transparent,
+                    scrolledContainerColor = Color.Transparent,
+                    navigationIconContentColor = Color.Transparent,
+                    titleContentColor = MaterialTheme.colorScheme.scrim,
+                    actionIconContentColor =Color.Transparent,
+                    subtitleContentColor = Color.Transparent
                 ),
 
                 actions = {
                     IconButton({isEdit = true}) {
                         Icon(
-                            painterResource(id= R.drawable.edit_40px), "Edit",tint= MaterialTheme.colorScheme.inversePrimary)
+                            painterResource(id= R.drawable.edit_40px), "Edit",tint= MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.size(35.dp))
                     }
                 }
                 ) },
             contentWindowInsets = WindowInsets(16.dp,16.dp,16.dp,16.dp)
             )
          { padding ->
+            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = Color.Black)
+           Spacer(Modifier.height(16.dp))
             LazyColumn(
                 Modifier.padding(padding),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -203,20 +217,19 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceAround,
+                        verticalAlignment = Alignment.CenterVertically
                     ){
-                        Column( modifier = Modifier.weight(3f),
+                        Column( modifier = Modifier.weight(4f),
                             horizontalAlignment = Alignment.Start,
                             verticalArrangement = Arrangement.Center
-                        ){ Text("Pregnant?",Modifier.padding(vertical=16.dp).fillMaxWidth(), style = MaterialTheme.typography.bodyLargeEmphasized)}
-                        Column( modifier = Modifier.weight(1f),
-                            horizontalAlignment = Alignment.End,
-                            verticalArrangement = Arrangement.Center
-                        ) {
+                        ){ Text("Pregnant?",Modifier.padding(vertical=16.dp).fillMaxWidth(), style = MaterialTheme.typography.bodyLargeEmphasized)
+
+                        }
                             RadioButton(
-                                selected = isPreg,
+                                modifier = Modifier.size(20.dp),
+                                selected = profile.pregnant,
                                 enabled = false,
                                 onClick = { })
-                        }
                         }
                     }
                 }
@@ -226,7 +239,10 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
         AlertBox(
             args = alerts,
             isMedWarning = false,
-            onDismiss = { isWrong = false }
+            onDismiss = {
+                isWrong = false
+                editViewModel.alerts = mutableListOf<String>()
+            }
         )
     }
 }
@@ -274,17 +290,18 @@ fun DetailItemEdit(label:String, info:String, state : TextFieldState, isError: B
 fun InputEdit(state : TextFieldState, info:String, isError : Boolean ){
     TextField(state,
         modifier= Modifier
-            .width(130.dp)
+            .width(130.dp).height(50.dp)
         ,
-        placeholder = {Text(info, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.End)}, isError = isError,
+        textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.End),
+        placeholder = {Text(info, style = MaterialTheme.typography.bodyLarge)}, isError = isError,
         lineLimits = TextFieldLineLimits.SingleLine,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
+            errorContainerColor = Color.Transparent ,
             focusedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
             unfocusedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
-        ),
-        contentPadding = PaddingValues( 0.dp)
+        )
 
         )
 }

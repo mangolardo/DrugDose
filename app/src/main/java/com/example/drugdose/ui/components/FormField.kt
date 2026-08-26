@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldLabelPosition
@@ -26,7 +27,7 @@ fun FormField(
         label = {
             Text(
                 text=label,
-                fontSize = 20.sp
+               style = MaterialTheme.typography.bodyLargeEmphasized
         )},
         placeholder = {Text(text="Type here...")},
         shape = RoundedCornerShape(25),
