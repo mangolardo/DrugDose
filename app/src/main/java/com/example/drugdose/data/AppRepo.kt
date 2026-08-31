@@ -3,14 +3,10 @@ package com.example.drugdose.data
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.json.Json
 
-class AppRepo (private val dao: AppDao, meds : List<Medicine> ){
-    val medicines : List<Medicine> = meds
-  //  val medicines : Flow<List<Medicine>> = dao.getAllMeds()
+class AppRepo (private val dao: AppDao ){
+    val medicines : Flow<List<Medicine>> = dao.getAllMeds()
     val profiles : Flow<List<Profile>> = dao.getAllProfiles()
 
-//    fun getMed(id : Int) {
-//    dao.getMed(id)
-//    }
     suspend fun insertProfile(profile: Profile){
         dao.insertProfile(profile)
     }
@@ -19,5 +15,8 @@ class AppRepo (private val dao: AppDao, meds : List<Medicine> ){
     }
     suspend fun deleteProfile(profile:Profile){
         dao.deleteProfile(profile)
+    }
+    suspend fun insertAll(meds : List<Medicine>){
+        dao.insertAll(meds)
     }
 }

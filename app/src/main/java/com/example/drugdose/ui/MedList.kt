@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -54,23 +55,23 @@ fun ListMed(
     viewModel: SharedViewModel
 
 ) {
-    val state = rememberLazyListState()
-
-    val list = uiState.meds
-            LazyColumn(
-                state = state,
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(vertical =  with(LocalDensity.current) { (WindowInsets.statusBars.getTop(this) * 1.2f).toDp() })
-            ) {
-                items(items = list) { med ->
-                    MedListItem(med = med, toResult = toResult, viewModel, uiState) { ontoResult() }
-                }
+        val state = rememberLazyListState()
+        val list = uiState.meds
+        LazyColumn(
+            state = state,
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(vertical = with(LocalDensity.current) { (WindowInsets.statusBars.getTop(this) * 1.2f).toDp() })
+        ) {
+            items(items = list) { med ->
+                MedListItem(med = med, toResult = toResult, viewModel, uiState) { ontoResult() }
             }
-    StatusBarProtection()
-    }
+        }
+        StatusBarProtection()
+
+}
 @Composable
 private fun StatusBarProtection(
     color: Color = MaterialTheme.colorScheme.surfaceContainer,
@@ -130,7 +131,7 @@ fun MedListItem (
                  textAlign = TextAlign.Start
              )
              Text(
-                 text = "${med.name} is a very cool medication",
+                 text = med.desc,
                  style = MaterialTheme.typography.bodyMedium ,
              )
          }

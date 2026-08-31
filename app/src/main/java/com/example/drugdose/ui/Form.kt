@@ -138,7 +138,7 @@ val alerts = formView.alerts
 //                        nameState.text.isEmpty()
                 if (nameState.text.isEmpty()||ageState.text.isEmpty()||heightState.text.isEmpty()||weightState.text.isEmpty())formView.addAlert("Fields can't be empty")
                 else if  (  nameState.text.length > 10)formView.addAlert("Profile name can't be longer than 10 characters")
-                if  (validateInputEmpty(ageState, "Age"))formView.addAlert("Age must be between 0-110")
+                if  (validateInputEmpty(ageState, "Age"))formView.addAlert("Age must be between 0-100")
                 if ( validateInputEmpty(weightState, "Weight(kg)")) formView.addAlert("Weight must be between 0-230")
                 if (  validateInputEmpty(heightState, "Height(cm)") ) formView.addAlert("Height must be between 0-220")
                 val hasError = !alerts.isEmpty()
@@ -148,8 +148,8 @@ val alerts = formView.alerts
                     val profile: Profile = Profile(
                         name = name,
                         age = age.toInt(),
-                        weight = weight.toShort(),
-                        height = height.toShort(),
+                        weight = weight.toFloat(),
+                        height = height.toFloat(),
                         pregnant = selectedOption
                     )
                     viewModel.addProfile(profile)

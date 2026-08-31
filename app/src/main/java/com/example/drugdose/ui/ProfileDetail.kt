@@ -108,13 +108,12 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                                         .isEmpty()
                                 ) profile.age else editViewModel.ageState.text.toString().toInt(),
                                 height = if (editViewModel.heightState.text.toString()
-                                        .isEmpty()
-                                ) profile.height else editViewModel.heightState.text.toString()
-                                    .toShort(),
+                                        .isEmpty()) profile.height else editViewModel.heightState.text.toString()
+                                    .toFloat(),
                                 weight = if (editViewModel.weightState.text.toString()
                                         .isEmpty()
                                 ) profile.weight else editViewModel.weightState.text.toString()
-                                    .toShort(),
+                                    .toFloat(),
                                 pregnant = isPreg
                             )
                             viewModel.updateProfile(newProf)

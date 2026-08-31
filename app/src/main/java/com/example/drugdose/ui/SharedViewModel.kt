@@ -10,59 +10,79 @@ import com.example.drugdose.data.Profile
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SharedViewModel(val repo : AppRepo) : ViewModel() {
 
-    val uiState = MutableStateFlow(UiState(profiles =  repo.profiles,
-        meds = repo.medicines))
-    val _uiState: StateFlow<UiState> = uiState
-    fun selectProfile(profile: Profile){
-        uiState.value = uiState.value.copy(selectedProfile = profile,selectedMed = null)
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState> = _uiState
+
+    init {
+        viewModelScope.launch {
+            repo.profiles.collect { profiles ->
+                _uiState.update { it.copy(profiles = profiles) }
+            }
+        }
+        viewModelScope.launch {
+            repo.medicines.collect { meds ->
+                _uiState.update { it.copy(meds = meds) }
+            }
+        }
     }
 
-    //room queries
-
+    fun selectProfile(profile: Profile){
+        _uiState.update { it.copy(selectedProfile = profile, selectedMed = null) }
+    }
 
     fun selectMed(med: Medicine){
-        uiState.value = uiState.value.copy(selectedMed = med)
-
+        _uiState.update { it.copy(selectedMed = med) }
     }
+
     fun resetMed(){
-        uiState.value = uiState.value.copy(selectedMed = null)
-
+        _uiState.update { it.copy(selectedMed = null) }
     }
+
     fun resetUi(){
-        uiState.value = UiState(
-            profiles =  repo.profiles,
-            meds = repo.medicines,
-            isAlert = false
-        )
-
+        _uiState.update { 
+            UiState(
+                profiles = it.profiles,
+                meds = it.meds,
+                isAlert = false
+            )
+        }
     }
+
     fun addProfile(profile: Profile){
-        //fields checks
         viewModelScope.launch {
             repo.insertProfile(profile)
         }
     }
+
+    fun populate(meds : List<Medicine>){
+        viewModelScope.launch {
+            repo.insertAll(meds)
+        }
+    }
+
     fun updateProfile(profile: Profile){
-        //fields checks
         viewModelScope.launch {
             repo.updateProfile(profile)
         }
     }
 
     fun setDose(dose: Double){
-        uiState.value = uiState.value.copy(calculatedDose = dose)
+        _uiState.update { it.copy(calculatedDose = dose) }
     }
+
     fun setAlert(value:Boolean){
-        uiState.value = uiState.value.copy(isAlert = value)
+        _uiState.update { it.copy(isAlert = value) }
     }
 }
+
 data class UiState(
-    val profiles : Flow<List<Profile>>,
-    val meds : List<Medicine>,
+    val profiles : List<Profile> = emptyList(),
+    val meds : List<Medicine> = emptyList(),
     val selectedProfile : Profile? = null,
     val selectedMed : Medicine? = null,
     val calculatedDose : Double? = null,

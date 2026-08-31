@@ -5,14 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,6 +22,9 @@ import com.example.drugdose.data.AppDatabase
 import com.example.drugdose.data.AppRepo
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.ui.theming.AppTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.serialization.json.Json
 
 class MainActivity : ComponentActivity() {
@@ -28,21 +32,22 @@ class MainActivity : ComponentActivity() {
     //private  val viewModel : SharedViewModel = ViewModelProvider(this,fact)[SharedViewModel::class.java]
     //plus button sequence : main -> list of profiles -> if new profile {form} -> medicine list ->  if conflict {alert} else >(handle back button to main) result (return to main {flag activity clear top?})
     override fun onCreate(savedInstanceState: Bundle?) {
-        val file = (this.assets.open("medsJson.json").bufferedReader().use { it.readText()})
-        val list = Json.decodeFromString<List<Medicine>>(file)
-        val database = AppDatabase.getDataBase(this)
-        val repository = AppRepo(database.appDao(),list)
+        val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+        val database = AppDatabase.getDataBase(this, applicationScope)
+        val repository = AppRepo(database.appDao())
         val fact = SharedViewModelFactory(repository)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             val viewModel : SharedViewModel = viewModel(factory = fact)
-            val uiState by viewModel._uiState.collectAsStateWithLifecycle()
+
+            val uiState by viewModel.uiState.collectAsStateWithLifecycle()
             AppTheme {
                 Surface(){
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                        )
+                Column(
+                       modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                      )
                     {
                         AppNav(uiState,viewModel)
                     }
@@ -60,7 +65,8 @@ fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
     val navControl = rememberNavController()
     NavHost(
         navController = navControl,
-        startDestination = "DoseMain"
+        startDestination = "DoseMain",
+       // modifier = Modifier.fillMaxSize()
     ) {
         composable("DoseMain") {
             DoseMain(

@@ -1,8 +1,8 @@
 package com.example.drugdose.data
 
 import androidx.compose.ui.text.font.FontWeight
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room3.Entity
+import androidx.room3.PrimaryKey
 import kotlinx.serialization.Serializable
 
 @Entity(tableName = "Profiles")
@@ -11,7 +11,7 @@ data class Profile(
     val id: Int = 0,
     val name: String,
     val age:Int,
-    val weight: Short,
-    val height:Short,
+    val weight: Float,
+    val height: Float,
     val pregnant: Boolean
 )

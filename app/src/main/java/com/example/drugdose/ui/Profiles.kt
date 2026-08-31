@@ -51,7 +51,7 @@ fun Profiles(
     viewModel: SharedViewModel
 ){
     val state = rememberLazyListState()
-    val list by uiState.profiles.collectAsStateWithLifecycle(initialValue = emptyList())
+    val list = uiState.profiles
 Scaffold(topBar = {
     TopAppBar({
         val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)

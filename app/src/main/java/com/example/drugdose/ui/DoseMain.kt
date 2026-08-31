@@ -57,7 +57,7 @@ fun DoseMain(
             text = "What's your dose?",
             style = MaterialTheme.typography.titleLargeEmphasized
         )
-//        Text(text = "What's your dose?", style = MaterialTheme.typography.titleLargeEmphasized)
+
         Spacer(
             modifier = Modifier
                 .height(15.dp)

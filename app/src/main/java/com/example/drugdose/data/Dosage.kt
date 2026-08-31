@@ -1,11 +1,11 @@
 package com.example.drugdose.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@SerialName("Dosage")
 data class Dosage(
     val type : String,
-    val dose : Int
+    val dose : Double
 )
