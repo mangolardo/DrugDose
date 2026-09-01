@@ -83,7 +83,7 @@ Scaffold(topBar = {
                 FloatingActionButton(
                     onClick =  onNew
                 ) {
-                    Icon(painterResource(id = R.drawable.add_24px), contentDescription = "New Profile")
+                    Icon(painterResource(id = R.drawable.add_40px), contentDescription = "New Profile")
                 }
             }, containerColor = Color.Transparent
         )

@@ -62,7 +62,7 @@ fun ListMed(
             modifier = Modifier
                 .fillMaxSize(),
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(vertical = with(LocalDensity.current) { (WindowInsets.statusBars.getTop(this) * 1.2f).toDp() })
         ) {
             items(items = list) { med ->
@@ -127,7 +127,7 @@ fun MedListItem (
          ) {
              Text(
                  text = med.name,
-                 style = MaterialTheme.typography.titleLargeEmphasized,
+                 style = MaterialTheme.typography.titleMediumEmphasized,
                  textAlign = TextAlign.Start
              )
              Text(

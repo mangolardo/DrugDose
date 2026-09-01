@@ -16,14 +16,21 @@ val typography = Typography(
     ),
     titleLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp,
-        lineHeight = 32.sp,
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
         letterSpacing = 0.sp,
+        fontFamily = Serif
+    ),
+    titleMedium = TextStyle(
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 21.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.15.sp,
         fontFamily = Serif
     ),
     bodyLarge = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 15.sp,
+        fontSize = 19.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.15.sp,
         fontFamily = Serif

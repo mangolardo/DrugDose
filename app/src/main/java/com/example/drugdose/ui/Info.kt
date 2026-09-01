@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
@@ -46,8 +47,10 @@ fun Info(){
        Column( modifier = Modifier.padding(paddingValues)) {
 
            Text(
-               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-               modifier = Modifier.padding(horizontal = 16.dp), style = MaterialTheme.typography.bodyLarge
+               "DrugDose é una applicazione per il calcolo automatico del dosaggio farmacologico che utilizza i parametri fisiologici del paziente e regole terapeutiche provenienti da fonti cliniche verificate(Banca Dati AIFA dei farmaci autorizzati in Italia). \nL'applicazione permette la consultazione del database medico, limitato a 15 prodotti in questa versione sperimentale.\n É possibile creare profili in cui salvare i parametri per ogni eventuale utente che utilizza l'applicazione e consultare la lista dei profili salvati. \nPremendo il bottone principale verrá chiesto all'utente di scegliere un profilo o di crearne uno, successivamente sará visualizzata la lista di farmaci tra cui scegliere il farmaco di cui si vuole sapere il dosaggio. Infine verrá visualizzata la dose in mg e la forma farmaceutica corrispondente disponibile in commercio.\nL'applicazione tiene conto delle limitazioni e range di etá, peso, dose massima e di eventuali controindicazioni per soggetti in gravidanza. ",
+               modifier = Modifier.padding(horizontal = 16.dp),
+               textAlign = TextAlign.Start,
+               style = MaterialTheme.typography.bodyLarge
            )
        }
    }

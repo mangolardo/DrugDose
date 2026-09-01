@@ -1,433 +1,400 @@
-[{
-  "name": "Amikacin",
-  "unit" : "kg",
-  "mgPerUnit" : 20.0,
-   "maxAge" : 90,
-   "minAge" : 2,
-   "maxWeight" : 99.6,
-   "minWeight" : 3.5,
-  "maxDose": 1555.0,
-  "dosages" : [{
-    "type" : "tabs" ,
-    "dose" : 400
+[
+  {
+    "name": "Tachipirina Compresse",
+    "desc": "Trattamento sintomatico di affezioni febbrili e stati dolorosi per via orale",
+    "pregnantOk": true,
+    "dosages": [
+      {
+        "type": "Compressa",
+        "dose": 500
+      },
+      {
+        "type": "Compressa",
+        "dose": 1000
+      }
+    ],
+    "dosageRules": [
+      {
+
+        "type": "WeightBracketBased",
+        "minAge": 7,
+        "maxAge": 100,
+        "maxDose": 3000.0,
+        "brackets": [
+          {
+            "minWeightKg": 21.0,
+            "maxWeightKg": 25.0,
+            "doseAmount": 250.0,
+            "maxDose" : 1500.0
+          },
+          {
+            "minWeightKg": 26.0,
+            "maxWeightKg": 40.0,
+            "doseAmount": 500.0,
+            "maxDose" : 1500.0
+          },
+          {
+            "minWeightKg": 41.0,
+            "maxWeightKg": 50.0,
+            "doseAmount": 500.0,
+            "maxDose" : 3000.0
+          },
+          {
+            "minWeightKg": 50.0,
+            "maxWeightKg": 300.0,
+            "doseAmount": 500.0,
+            "maxDose" : 3000.0
+          }
+        ]
+      },
+      {
+        "type": "FixedDose",
+        "minAge": 15,
+        "maxAge": 100,
+        "maxDose": 3000.0,
+        "quantity": 1000.0
+      }
+    ]
+  },
+  {
+    "name": "Tachipirina Supposte",
+    "desc": "Trattamento sintomatico di affezioni febbrili e dolore per via rettale",
+    "pregnantOk": true,
+    "dosages": [
+      {
+        "type": "Supposta Neonati",
+        "dose": 62
+      },
+      {
+        "type": "Supposta Prima Infanzia",
+        "dose": 125
+      },
+      {
+        "type": "Supposta Bambini",
+        "dose": 250
+      },
+      {
+        "type": "Supposta Bambini",
+        "dose": 500
+      },
+      {
+        "type": "Supposta Adulti",
+        "dose": 1000
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "WeightBracketBased",
+        "minAge": 0,
+        "maxAge": 100,
+        "maxDose": 4000.0,
+        "brackets": [
+          {
+            "minWeightKg": 3.2,
+            "maxWeightKg": 5.0,
+            "doseAmount": 62.5,
+            "maxDose" : 3000.0
+          },
+          {
+            "minWeightKg": 6.0,
+            "maxWeightKg": 7.0,
+            "doseAmount": 125.0,
+            "maxDose" : 500.0
+          },
+          {
+            "minWeightKg": 7.0,
+            "maxWeightKg": 10.0,
+            "doseAmount": 125.0,
+            "maxDose" : 625.0
+          },
+          {
+            "minWeightKg": 11.0,
+            "maxWeightKg": 12.0,
+            "doseAmount": 250.0,
+            "maxDose" : 750.0
+          },
+          {
+            "minWeightKg": 13.0,
+            "maxWeightKg": 20.0,
+            "doseAmount": 250.0,
+            "maxDose" : 1000.0
+          },
+          {
+            "minWeightKg": 21.0,
+            "maxWeightKg": 25.0,
+            "doseAmount": 500.0,
+            "maxDose" : 1500.0
+          },
+          {
+            "minWeightKg": 26.0,
+            "maxWeightKg": 40.0,
+            "doseAmount": 500.0,
+            "maxDose" : 2000.0
+          },
+          {
+            "minWeightKg": 41.0,
+            "maxWeightKg": 50.0,
+            "doseAmount": 1000.0,
+            "maxDose" : 3000.0
+          },
+          {
+            "minWeightKg": 50.0,
+            "maxWeightKg": 300.0,
+            "doseAmount": 1000.0,
+            "maxDose" : 4000.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Tachipirina Sciroppo",
+    "desc": "Trattamento sintomatico di affezioni febbrili e dolore per via orale",
+    "pregnantOk": true,
+    "dosages": [
+      {
+        "type": "ml",
+        "dose": 24
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "WeightBased",
+        "minAge": 0,
+        "maxAge": 10,
+        "maxDose": 57.6,
+        "doseAmount": 14.4
+      },
+      {
+        "type": "WeightBracketBased",
+        "minAge": 10,
+        "maxAge": 100,
+        "maxDose": 2880.0,
+        "brackets": [
+          {
+            "minWeightKg": 33.0,
+            "maxWeightKg": 40.0,
+            "doseAmount": 480.0,
+            "maxDose" : 1920.0
+          },
+          {
+            "minWeightKg": 40.0,
+            "maxWeightKg": 300.0,
+            "doseAmount": 480.0,
+            "maxDose" : 2880.0
+          }
+          ]
+      }
+      ]
+      },
+  {
+    "name": "Aulin Compresse",
+    "desc": "Trattamento del dolore acuto e dismenorrea primaria per via orale",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Compressa",
+        "dose": 100
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose" : 200.0,
+        "quantity": 100.0
+      }
+    ]
+  },
+  {
+    "name": "Aulin Granulato",
+    "desc": "Trattamento del dolore acuto e dismenorrea primaria in bustine da disciogliere in acqua",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Bustina",
+        "dose": 100
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose" : 200.0,
+        "quantity": 100.0
+      }
+    ]
+  },
+  {
+    "name": "Rivotril Compresse",
+    "desc": "Trattamento dell'epilessia nel neonato, nel bambino e nell'adulto",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Compressa",
+        "dose": 0.5
+      },
+      {
+        "type": "Compressa",
+        "dose": 2.0
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "WeightBased",
+        "minAge": 0,
+        "maxAge": 10,
+        "maxDose": 0.2,
+        "doseAmount": 0.1
+      },
+      {
+        "type": "FixedDose",
+        "minAge": 11,
+        "maxAge": 100,
+        "maxDose" : 6.0,
+        "quantity": 2.0
+      }
+    ]
+  },
+  {
+    "name": "Rivotril Gocce",
+    "desc": "Trattamento dell'epilessia nel neonato, nel bambino e nell'adulto",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Gocce",
+        "dose": 0.1
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "WeightBased",
+        "minAge": 0,
+        "maxAge": 10,
+        "maxDose": 0.2,
+        "doseAmount": 0.1
+      },
+      {
+        "type": "FixedDose",
+        "minAge": 11,
+        "maxAge": 100,
+        "maxDose" : 6.0,
+        "quantity": 2.0
+      }
+    ]
+  },
+  {
+    "name": "Brufen Compresse rivestite",
+    "desc": "Trattamento antinfiammatorioe analgesico per via orale",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Compressa rivestita",
+        "dose": 400
+      },
+      {
+        "type": "Compressa rivestita",
+        "dose": 600
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose" : 1800.0,
+        "quantity": 800.0
+      }
+    ]
+  },
+  {
+    "name": "Brufen Granulato effervescente",
+    "desc": "Trattamento antireumatico e analgesico in bustine effervescenti",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Bustina",
+        "dose": 600
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose" : 1800.0,
+        "quantity": 600.0
+      }
+    ]
   },
     {
-      "type" : "tabs" ,
-      "dose" : 600
-    }],
-  "alerts" : ["..."],
-  "pregnantOk" : true
-},
-  {
-  "name": "Medicina",
-  "unit" : "m2",
-  "mgPerUnit" : 3.0,
-  "maxAge" : 90,
-  "minAge" : 2,
-  "maxWeight" : 99.6,
-  "minWeight" : 3.5,
-  "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-  "pregnantOk" : true
-},
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
+      "name": "Macladin Compresse rivestite con film",
+      "desc": "Trattamento di infezioni batteriche negli adulti e adolescenti sopra i 12 anni (250 mg e 500 mg)",
+      "pregnantOk": false,
+      "dosages": [
+        {
+          "type": "Compressa rivestita",
+          "dose": 250.0
+        },
+        {
+          "type": "Compressa rivestita",
+          "dose": 500.0
+        }
+      ],
+      "dosageRules": [
+        {
+          "type": "FixedDose",
+          "minAge": 12,
+          "maxAge": 100,
+          "maxDose": 1000.0,
+          "quantity": 250.0
+        }
+      ]
     },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
+    {
+      "name": "Macladin Granulato per sospensione orale in bustine",
+      "desc": "Trattamento di infezioni batteriche negli adulti e adolescenti sopra i 12 anni in bustine da 250 mg",
+      "pregnantOk": false,
+      "dosages": [
+        {
+          "type": "Bustina",
+          "dose": 250.0
+        }
+      ],
+      "dosageRules": [
+        {
+          "type": "FixedDose",
+          "minAge": 12,
+          "maxAge": 100,
+          "maxDose": 1000.0,
+          "quantity": 250.0
+        }
+      ]
     },
+  {
+    "name": "Macladin Granulato per sospensione orale",
+    "desc": "Trattamento di infezioni batteriche nei bambini dai 6 mesi ai 12 anni in flacone (125 mg/5 ml e 250 mg/5 ml)",
+    "pregnantOk": false,
+    "dosages": [
       {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
+        "type": "ml",
+        "dose": 25.0
+      },
       {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
+        "type": "ml",
+        "dose": 50.0
+      }
+    ],
+    "dosageRules": [
       {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Amikacin",
-    "unit" : "kg",
-    "mgPerUnit" : 20.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 1555.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    },
-      {
-        "type" : "tabs" ,
-        "dose" : 600
-      }],
-    "alerts" : ["..."],
-    "pregnantOk" : true
-  },
-  {
-    "name": "Medicina",
-    "unit" : "m2",
-    "mgPerUnit" : 3.0,
-    "maxAge" : 90,
-    "minAge" : 2,
-    "maxWeight" : 99.6,
-    "minWeight" : 3.5,
-    "maxDose": 15.0,
-    "dosages" : [{
-      "type" : "tabs" ,
-      "dose" : 400
-    }],
-    "alerts" : [],
-    "pregnantOk" : true
+        "type": "WeightBased",
+        "minAge": 0,
+        "maxAge": 12,
+        "maxDose": 15,
+        "doseAmount": 7.5
+      }
+    ]
   }
 ]

@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-@Database(entities = [Profile::class, Medicine::class], version = 24)
+@Database(entities = [Profile::class, Medicine::class], version = 28)
 @ColumnTypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao() : AppDao
