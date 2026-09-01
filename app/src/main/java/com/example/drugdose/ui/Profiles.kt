@@ -54,12 +54,13 @@ fun Profiles(
     val list = uiState.profiles
 Scaffold(topBar = {
     TopAppBar({
+        val color = MaterialTheme.colorScheme.onBackground
         val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
         Text("Profiles", style = MaterialTheme.typography.titleLargeEmphasized, modifier = Modifier.drawBehind {
         val strokeWidthPx = 1.dp.toPx()
         val verticalOffset = size.height - 2.sp.toPx()
         drawLine(
-            color = Color.Black,
+            color = color,
             strokeWidth = strokeWidthPx,
             start = Offset(0f, verticalOffset),
             end = Offset(size.width, verticalOffset),
@@ -69,7 +70,7 @@ Scaffold(topBar = {
         containerColor = Color.Transparent,
         scrolledContainerColor = Color.Transparent,
         navigationIconContentColor = Color.Transparent,
-        titleContentColor = MaterialTheme.colorScheme.scrim,
+        titleContentColor = MaterialTheme.colorScheme.onBackground,
         actionIconContentColor =Color.Transparent,
         subtitleContentColor = Color.Transparent
     ))
@@ -130,7 +131,7 @@ fun ProfileItem(
         shape = RectangleShape,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable() {
+            .clickable {
                 viewModel.resetUi()
                 viewModel.selectProfile(profile)
                 clickAct()
@@ -165,7 +166,7 @@ fun ProfileItem(
 
             }
         }
-        HorizontalDivider(modifier = Modifier.fillMaxWidth(),thickness = 1.dp, color = Color.Black)
+        HorizontalDivider(modifier = Modifier.fillMaxWidth(),thickness = 1.dp, color = MaterialTheme.colorScheme.onBackground)
 
     }
 }

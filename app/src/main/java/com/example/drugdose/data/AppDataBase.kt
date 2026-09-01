@@ -11,23 +11,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-@Database(entities = [Profile::class, Medicine::class], version = 28)
+@Database(entities = [Profile::class, Medicine::class], version = 32)
 @ColumnTypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun appDao() : AppDao
-    companion object{
+    abstract fun appDao(): AppDao
+
+    companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDataBase(context: Context,scope: CoroutineScope) : AppDatabase{
-            return INSTANCE?: synchronized(this) {
+        fun getDataBase(context: Context, scope: CoroutineScope): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "DrugDoseDatabase"
                 )
                     .fallbackToDestructiveMigration()
-                    .addCallback(DatabasePrepopulateCallback(context,scope))
+                    .addCallback(DatabasePrepopulateCallback(context, scope))
                     .build()
 
                 INSTANCE = instance
@@ -36,7 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 }
-
+//callback per popolare il database nel momento in cui viene recuperata l'istanza
 class DatabasePrepopulateCallback(
     private val context: Context,
     private val scope: CoroutineScope
@@ -55,17 +56,16 @@ class DatabasePrepopulateCallback(
             val dao = db.appDao()
 
             if (dao.getMedsCount() == 0) {
-                // 1. Leggi il file JSON dalla cartella assets
+                // leggi il file JSON dalla cartella assets
                 val jsonString = context.assets.open("medsJson.json")
                     .bufferedReader()
                     .use { it.readText() }
 
                 val jsonFormatter = Json { ignoreUnknownKeys = true }
 
-                // 2. Deserializza DIRETTAMENTE nella lista di Medicine
                 val entities: List<Medicine> = jsonFormatter.decodeFromString(jsonString)
 
-                // 3. Inserisci direttamente nel database!
+                // inserisci nel database
                 dao.insertAll(entities)
             }
         } catch (e: Exception) {

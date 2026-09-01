@@ -1,21 +1,20 @@
 [
   {
-    "name": "Tachipirina Compresse",
-    "desc": "Trattamento sintomatico di affezioni febbrili e stati dolorosi per via orale",
+    "name": "Tachipirina Tablets",
+    "desc": "Symptomatic treatment of febrile conditions and painful states for oral use",
     "pregnantOk": true,
     "dosages": [
       {
-        "type": "Compressa",
+        "type": "Tablet",
         "dose": 500
       },
       {
-        "type": "Compressa",
+        "type": "Tablet",
         "dose": 1000
       }
     ],
     "dosageRules": [
       {
-
         "type": "WeightBracketBased",
         "minAge": 7,
         "maxAge": 100,
@@ -25,25 +24,25 @@
             "minWeightKg": 21.0,
             "maxWeightKg": 25.0,
             "doseAmount": 250.0,
-            "maxDose" : 1500.0
+            "maxDose": 1500.0
           },
           {
             "minWeightKg": 26.0,
             "maxWeightKg": 40.0,
             "doseAmount": 500.0,
-            "maxDose" : 1500.0
+            "maxDose": 1500.0
           },
           {
             "minWeightKg": 41.0,
             "maxWeightKg": 50.0,
             "doseAmount": 500.0,
-            "maxDose" : 3000.0
+            "maxDose": 3000.0
           },
           {
             "minWeightKg": 50.0,
             "maxWeightKg": 300.0,
             "doseAmount": 500.0,
-            "maxDose" : 3000.0
+            "maxDose": 3000.0
           }
         ]
       },
@@ -57,28 +56,28 @@
     ]
   },
   {
-    "name": "Tachipirina Supposte",
-    "desc": "Trattamento sintomatico di affezioni febbrili e dolore per via rettale",
+    "name": "Tachipirina Suppositories",
+    "desc": "Symptomatic treatment of febrile conditions and pain for rectal use",
     "pregnantOk": true,
     "dosages": [
       {
-        "type": "Supposta Neonati",
+        "type": "Suppository",
         "dose": 62
       },
       {
-        "type": "Supposta Prima Infanzia",
+        "type": "Suppository",
         "dose": 125
       },
       {
-        "type": "Supposta Bambini",
+        "type": "Suppository",
         "dose": 250
       },
       {
-        "type": "Supposta Bambini",
+        "type": "Suppository",
         "dose": 500
       },
       {
-        "type": "Supposta Adulti",
+        "type": "Suppository",
         "dose": 1000
       }
     ],
@@ -93,63 +92,63 @@
             "minWeightKg": 3.2,
             "maxWeightKg": 5.0,
             "doseAmount": 62.5,
-            "maxDose" : 3000.0
+            "maxDose": 3000.0
           },
           {
             "minWeightKg": 6.0,
             "maxWeightKg": 7.0,
             "doseAmount": 125.0,
-            "maxDose" : 500.0
+            "maxDose": 500.0
           },
           {
             "minWeightKg": 7.0,
             "maxWeightKg": 10.0,
             "doseAmount": 125.0,
-            "maxDose" : 625.0
+            "maxDose": 625.0
           },
           {
             "minWeightKg": 11.0,
             "maxWeightKg": 12.0,
             "doseAmount": 250.0,
-            "maxDose" : 750.0
+            "maxDose": 750.0
           },
           {
             "minWeightKg": 13.0,
             "maxWeightKg": 20.0,
             "doseAmount": 250.0,
-            "maxDose" : 1000.0
+            "maxDose": 1000.0
           },
           {
             "minWeightKg": 21.0,
             "maxWeightKg": 25.0,
             "doseAmount": 500.0,
-            "maxDose" : 1500.0
+            "maxDose": 1500.0
           },
           {
             "minWeightKg": 26.0,
             "maxWeightKg": 40.0,
             "doseAmount": 500.0,
-            "maxDose" : 2000.0
+            "maxDose": 2000.0
           },
           {
             "minWeightKg": 41.0,
             "maxWeightKg": 50.0,
             "doseAmount": 1000.0,
-            "maxDose" : 3000.0
+            "maxDose": 3000.0
           },
           {
             "minWeightKg": 50.0,
             "maxWeightKg": 300.0,
             "doseAmount": 1000.0,
-            "maxDose" : 4000.0
+            "maxDose": 4000.0
           }
         ]
       }
     ]
   },
   {
-    "name": "Tachipirina Sciroppo",
-    "desc": "Trattamento sintomatico di affezioni febbrili e dolore per via orale",
+    "name": "Tachipirina Syrup",
+    "desc": "Symptomatic treatment of febrile conditions and pain for oral use",
     "pregnantOk": true,
     "dosages": [
       {
@@ -175,25 +174,25 @@
             "minWeightKg": 33.0,
             "maxWeightKg": 40.0,
             "doseAmount": 480.0,
-            "maxDose" : 1920.0
+            "maxDose": 1920.0
           },
           {
             "minWeightKg": 40.0,
             "maxWeightKg": 300.0,
             "doseAmount": 480.0,
-            "maxDose" : 2880.0
+            "maxDose": 2880.0
           }
-          ]
+        ]
       }
-      ]
-      },
+    ]
+  },
   {
-    "name": "Aulin Compresse",
-    "desc": "Trattamento del dolore acuto e dismenorrea primaria per via orale",
+    "name": "Aulin Tablets",
+    "desc": "Oral treatment of acute pain and primary dysmenorrhea",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Compressa",
+        "type": "Tablet",
         "dose": 100
       }
     ],
@@ -202,18 +201,18 @@
         "type": "FixedDose",
         "minAge": 12,
         "maxAge": 100,
-        "maxDose" : 200.0,
+        "maxDose": 200.0,
         "quantity": 100.0
       }
     ]
   },
   {
-    "name": "Aulin Granulato",
-    "desc": "Trattamento del dolore acuto e dismenorrea primaria in bustine da disciogliere in acqua",
+    "name": "Aulin Granules",
+    "desc": "Treatment of acute pain and primary dysmenorrhea in packets to dissolve in water",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Bustina",
+        "type": "Packet",
         "dose": 100
       }
     ],
@@ -222,22 +221,22 @@
         "type": "FixedDose",
         "minAge": 12,
         "maxAge": 100,
-        "maxDose" : 200.0,
+        "maxDose": 200.0,
         "quantity": 100.0
       }
     ]
   },
   {
-    "name": "Rivotril Compresse",
-    "desc": "Trattamento dell'epilessia nel neonato, nel bambino e nell'adulto",
+    "name": "Rivotril Tablets",
+    "desc": "Treatment of epilepsy in infants, children, and adults",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Compressa",
+        "type": "Tablet",
         "dose": 0.5
       },
       {
-        "type": "Compressa",
+        "type": "Tablet",
         "dose": 2.0
       }
     ],
@@ -253,18 +252,18 @@
         "type": "FixedDose",
         "minAge": 11,
         "maxAge": 100,
-        "maxDose" : 6.0,
+        "maxDose": 6.0,
         "quantity": 2.0
       }
     ]
   },
   {
-    "name": "Rivotril Gocce",
-    "desc": "Trattamento dell'epilessia nel neonato, nel bambino e nell'adulto",
+    "name": "Rivotril Drops",
+    "desc": "Treatment of epilepsy in infants, children, and adults",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Gocce",
+        "type": "Drops",
         "dose": 0.1
       }
     ],
@@ -280,22 +279,22 @@
         "type": "FixedDose",
         "minAge": 11,
         "maxAge": 100,
-        "maxDose" : 6.0,
+        "maxDose": 6.0,
         "quantity": 2.0
       }
     ]
   },
   {
-    "name": "Brufen Compresse rivestite",
-    "desc": "Trattamento antinfiammatorioe analgesico per via orale",
+    "name": "Brufen Film-coated Tablets",
+    "desc": "Oral anti-inflammatory and analgesic treatment",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Compressa rivestita",
+        "type": "Tablet",
         "dose": 400
       },
       {
-        "type": "Compressa rivestita",
+        "type": "Tablet",
         "dose": 600
       }
     ],
@@ -304,18 +303,18 @@
         "type": "FixedDose",
         "minAge": 12,
         "maxAge": 100,
-        "maxDose" : 1800.0,
+        "maxDose": 1800.0,
         "quantity": 800.0
       }
     ]
   },
   {
-    "name": "Brufen Granulato effervescente",
-    "desc": "Trattamento antireumatico e analgesico in bustine effervescenti",
+    "name": "Brufen Effervescent Granules",
+    "desc": "Anti-rheumatic and analgesic treatment in effervescent sachets",
     "pregnantOk": false,
     "dosages": [
       {
-        "type": "Bustina",
+        "type": "Packet",
         "dose": 600
       }
     ],
@@ -324,58 +323,58 @@
         "type": "FixedDose",
         "minAge": 12,
         "maxAge": 100,
-        "maxDose" : 1800.0,
+        "maxDose": 1800.0,
         "quantity": 600.0
       }
     ]
   },
-    {
-      "name": "Macladin Compresse rivestite con film",
-      "desc": "Trattamento di infezioni batteriche negli adulti e adolescenti sopra i 12 anni (250 mg e 500 mg)",
-      "pregnantOk": false,
-      "dosages": [
-        {
-          "type": "Compressa rivestita",
-          "dose": 250.0
-        },
-        {
-          "type": "Compressa rivestita",
-          "dose": 500.0
-        }
-      ],
-      "dosageRules": [
-        {
-          "type": "FixedDose",
-          "minAge": 12,
-          "maxAge": 100,
-          "maxDose": 1000.0,
-          "quantity": 250.0
-        }
-      ]
-    },
-    {
-      "name": "Macladin Granulato per sospensione orale in bustine",
-      "desc": "Trattamento di infezioni batteriche negli adulti e adolescenti sopra i 12 anni in bustine da 250 mg",
-      "pregnantOk": false,
-      "dosages": [
-        {
-          "type": "Bustina",
-          "dose": 250.0
-        }
-      ],
-      "dosageRules": [
-        {
-          "type": "FixedDose",
-          "minAge": 12,
-          "maxAge": 100,
-          "maxDose": 1000.0,
-          "quantity": 250.0
-        }
-      ]
-    },
   {
-    "name": "Macladin Granulato per sospensione orale",
-    "desc": "Trattamento di infezioni batteriche nei bambini dai 6 mesi ai 12 anni in flacone (125 mg/5 ml e 250 mg/5 ml)",
+    "name": "Macladin Tablets",
+    "desc": "Treatment of bacterial infections in adults and adolescents over 12 years",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Tablet",
+        "dose": 250.0
+      },
+      {
+        "type": "Tablet",
+        "dose": 500.0
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose": 1000.0,
+        "quantity": 250.0
+      }
+    ]
+  },
+  {
+    "name": "Macladin Granules",
+    "desc": "Treatment of bacterial infections in adults and adolescents over 12 years",
+    "pregnantOk": false,
+    "dosages": [
+      {
+        "type": "Packet",
+        "dose": 250.0
+      }
+    ],
+    "dosageRules": [
+      {
+        "type": "FixedDose",
+        "minAge": 12,
+        "maxAge": 100,
+        "maxDose": 1000.0,
+        "quantity": 250.0
+      }
+    ]
+  },
+  {
+    "name": "Macladin Granules",
+    "desc": "Treatment of bacterial infections in children aged 6 months to 12 years in bottle",
     "pregnantOk": false,
     "dosages": [
       {

@@ -28,12 +28,13 @@ fun Info(){
    Scaffold(topBar = {
 
        TopAppBar({
+           val color = MaterialTheme.colorScheme.onBackground
            val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
            Text("How it works", modifier = Modifier.drawBehind {
            val strokeWidthPx = 1.dp.toPx()
            val verticalOffset = size.height - 2.sp.toPx()
            drawLine(
-               color = Color.Black,
+               color = color,
                strokeWidth = strokeWidthPx,
                start = Offset(0f, verticalOffset),
                end = Offset(size.width, verticalOffset),
@@ -47,7 +48,15 @@ fun Info(){
        Column( modifier = Modifier.padding(paddingValues)) {
 
            Text(
-               "DrugDose é una applicazione per il calcolo automatico del dosaggio farmacologico che utilizza i parametri fisiologici del paziente e regole terapeutiche provenienti da fonti cliniche verificate(Banca Dati AIFA dei farmaci autorizzati in Italia). \nL'applicazione permette la consultazione del database medico, limitato a 15 prodotti in questa versione sperimentale.\n É possibile creare profili in cui salvare i parametri per ogni eventuale utente che utilizza l'applicazione e consultare la lista dei profili salvati. \nPremendo il bottone principale verrá chiesto all'utente di scegliere un profilo o di crearne uno, successivamente sará visualizzata la lista di farmaci tra cui scegliere il farmaco di cui si vuole sapere il dosaggio. Infine verrá visualizzata la dose in mg e la forma farmaceutica corrispondente disponibile in commercio.\nL'applicazione tiene conto delle limitazioni e range di etá, peso, dose massima e di eventuali controindicazioni per soggetti in gravidanza. ",
+               "DrugDose is an application for automatic pharmacological dosage calculation that uses patient physiological parameters and therapeutic rules from verified clinical sources (AIFA Database of authorized drugs in Italy).\n" +
+                       "\n" +
+                       "The application allows manual consultation of the medical database, limited to 12 products in this experimental version. A search feature might be added in future releases\n" +
+                       "\n" +
+                       "Users can create profiles to save parameters for each person that utilizes the application and view the list of saved profiles.\n" +
+                       "\n" +
+                       "Pressing the main button prompts the user to select or create a profile, after which a list of medications is displayed to choose the drug for dosage calculation. Finally, the calculated dose in mg and the corresponding commercially available pharmaceutical form will be displayed.\n" +
+                       "\n" +
+                       "The application accounts for age and weight limitations and ranges, maximum dosage, and potential contraindications for pregnant patients.",
                modifier = Modifier.padding(horizontal = 16.dp),
                textAlign = TextAlign.Start,
                style = MaterialTheme.typography.bodyLarge

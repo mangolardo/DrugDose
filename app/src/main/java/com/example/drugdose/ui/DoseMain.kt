@@ -41,13 +41,14 @@ fun DoseMain(
         modifier = Modifier
             .fillMaxSize()
     ) {
+        val color = MaterialTheme.colorScheme.onBackground
         val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
         Text(
             modifier = Modifier.drawBehind {
                 val strokeWidthPx = 1.dp.toPx()
                 val verticalOffset = size.height - 2.sp.toPx()
                 drawLine(
-                    color = Color.Black,
+                    color = color,
                     strokeWidth = strokeWidthPx,
                     start = Offset(0f, verticalOffset),
                     end = Offset(size.width, verticalOffset),

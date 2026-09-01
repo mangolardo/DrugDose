@@ -58,6 +58,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
     val med = uiState.selectedMed
     var dose: Double = 0.0
     var maxDose = 0.0
+    val color = MaterialTheme.colorScheme.onBackground
     if (profile == null || med == null) {
         throw Exception("profile or med not selected")
     } else {
@@ -72,7 +73,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     alerts.add("MinAge")
                     break
                 }
-                if (age < rule.maxAge) {
+                if (age <= rule.maxAge) {
                     dosageRule = rule
                     break
                 }
@@ -83,6 +84,9 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
             maxDose =  dosageRule.calculateDose(profile = profile).second
             if (dose == -1.0) alerts.add("MaxWeight")
             if (dose == 0.0) alerts.add("MinWeight")
+           if(profile.pregnant && !med.pregnantOk) {
+               alerts.add("Pregnant")
+           }
             if (dose > maxDose) dose = maxDose
         }
 
@@ -123,7 +127,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                                     moveTo(it.getLineLeft(i), it.getLineBottom(i) - spacingExtra + offsetY)
                                     lineTo(it.getLineRight(i), it.getLineBottom(i) - spacingExtra + offsetY)
                                 },
-                                Color.Gray,
+                                color,
                                 style = Stroke(
                                     width = thickness,
                                     pathEffect = pathEffect
@@ -139,7 +143,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     .wrapContentHeight().dropShadow(RoundedCornerShape(25), Shadow(5.dp)),
                 colors = ButtonDefaults.buttonColors().copy(
                     MaterialTheme.colorScheme.background,
-                    contentColor = MaterialTheme.colorScheme.scrim
+                    contentColor = MaterialTheme.colorScheme.onBackground
                 ),
                 shape = RoundedCornerShape(25),
                 onClick =
@@ -147,7 +151,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                         onClickAct()
                     }
             ) {
-                var string =  commercial.type + " of " + commercial.dose + "mg"
+                var string =  pluralize(commercial.type , n)+ " of " + commercial.dose + "mg"
                 if( commercial.type == "ml") string = "ml"
                 Text(
                     text = "${
@@ -185,7 +189,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                                     moveTo(it.getLineLeft(i), it.getLineBottom(i) - spacingExtra + offsetY)
                                     lineTo(it.getLineRight(i), it.getLineBottom(i) - spacingExtra + offsetY)
                                 },
-                                Color.Gray,
+                                color,
                                 style = Stroke(
                                     width = thickness,
                                     pathEffect = pathEffect
@@ -201,7 +205,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     .wrapContentHeight().dropShadow(RoundedCornerShape(25), Shadow(5.dp)),
                 colors = ButtonDefaults.buttonColors().copy(
                     MaterialTheme.colorScheme.background,
-                    contentColor = MaterialTheme.colorScheme.scrim
+                    contentColor = MaterialTheme.colorScheme.onBackground
                 ),
                 shape = RoundedCornerShape(25),
                 onClick =
@@ -210,7 +214,7 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     }
             ) {
               val  nn = maxDose / commercial.dose
-                var string =  commercial.type + " of " + commercial.dose + "mg"
+                var string =  pluralize(commercial.type,nn) + " of " + commercial.dose + "mg"
                 if( commercial.type == "ml") string = "ml"
                 Text(
                     text = "${

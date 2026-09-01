@@ -85,7 +85,7 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                         containerColor = Color.Transparent,
                         scrolledContainerColor = Color.Transparent,
                         navigationIconContentColor = Color.Transparent,
-                        titleContentColor = MaterialTheme.colorScheme.scrim,
+                        titleContentColor = MaterialTheme.colorScheme.onBackground,
                         actionIconContentColor =Color.Transparent,
                         subtitleContentColor = Color.Transparent
                     ),
@@ -109,7 +109,7 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                                 ) profile.age else editViewModel.ageState.text.toString().toInt(),
                                 height = if (editViewModel.heightState.text.toString()
                                         .isEmpty()) profile.height else editViewModel.heightState.text.toString()
-                                    .toFloat(),
+                                    .toInt(),
                                 weight = if (editViewModel.weightState.text.toString()
                                         .isEmpty()
                                 ) profile.weight else editViewModel.weightState.text.toString()
@@ -123,7 +123,7 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                     }
                     ) {
                         Icon(
-                            painterResource(id= R.drawable.check_40px), "Save",tint= MaterialTheme.colorScheme.primaryContainer)
+                            painterResource(id= R.drawable.check_40px), "Save",tint= MaterialTheme.colorScheme.onBackground)
                     }
                     IconButton({
                         editViewModel.ageState = TextFieldState("")
@@ -134,14 +134,14 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                         isEdit = false
                     }) {
                         Icon(
-                            painterResource(id= R.drawable.close_40px), "Cancel",tint= MaterialTheme.colorScheme.primaryContainer)
+                            painterResource(id= R.drawable.close_40px), "Cancel",tint= MaterialTheme.colorScheme.onBackground)
                     }
                 }
             ) },
             contentWindowInsets = WindowInsets(16.dp,16.dp,16.dp,16.dp)
         )
         { padding ->
-            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = Color.Black)
+            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = MaterialTheme.colorScheme.onBackground)
             LazyColumn(
                 Modifier.padding(padding),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -187,7 +187,7 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                     containerColor = Color.Transparent,
                     scrolledContainerColor = Color.Transparent,
                     navigationIconContentColor = Color.Transparent,
-                    titleContentColor = MaterialTheme.colorScheme.scrim,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
                     actionIconContentColor =Color.Transparent,
                     subtitleContentColor = Color.Transparent
                 ),
@@ -195,14 +195,14 @@ fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
                 actions = {
                     IconButton({isEdit = true}) {
                         Icon(
-                            painterResource(id= R.drawable.edit_40px), "Edit",tint= MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.size(35.dp))
+                            painterResource(id= R.drawable.edit_40px), "Edit",tint= MaterialTheme.colorScheme.onBackground, modifier = Modifier.size(35.dp))
                     }
                 }
                 ) },
             contentWindowInsets = WindowInsets(16.dp,16.dp,16.dp,16.dp)
             )
          { padding ->
-            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = Color.Black)
+            HorizontalDivider(modifier = Modifier.padding(vertical = padding.calculateTopPadding()).fillMaxWidth(),thickness = 1.dp, color = MaterialTheme.colorScheme.onBackground)
            Spacer(Modifier.height(16.dp))
             LazyColumn(
                 Modifier.padding(padding),

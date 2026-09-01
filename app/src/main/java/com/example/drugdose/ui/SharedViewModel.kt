@@ -17,14 +17,15 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState
-
+    //inizializzazione dei profili e medicine quando il viewmodel viene creato
+    //collect permette al viewmodel di ricevere i flow proveniente dalla repository ad ogni modifica dei dati sul database
     init {
         viewModelScope.launch {
             repo.profiles.collect { profiles ->
-                _uiState.update { it.copy(profiles = profiles) }
+                _uiState.update { it.copy(profiles = profiles) } //aggiornamento thread-safe della ui, gestione delle concorrenza delle coroutine
             }
         }
-        viewModelScope.launch {
+        viewModelScope.launch { //segue il lifecycle del viewmodel
             repo.medicines.collect { meds ->
                 _uiState.update { it.copy(meds = meds) }
             }
@@ -59,11 +60,6 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
         }
     }
 
-    fun populate(meds : List<Medicine>){
-        viewModelScope.launch {
-            repo.insertAll(meds)
-        }
-    }
 
     fun updateProfile(profile: Profile){
         viewModelScope.launch {
@@ -71,13 +67,6 @@ class SharedViewModel(val repo : AppRepo) : ViewModel() {
         }
     }
 
-    fun setDose(dose: Double){
-        _uiState.update { it.copy(calculatedDose = dose) }
-    }
-
-    fun setAlert(value:Boolean){
-        _uiState.update { it.copy(isAlert = value) }
-    }
 }
 
 data class UiState(

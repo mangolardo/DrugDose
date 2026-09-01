@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("Dosage")
 data class Dosage(
-    val type : String,
-    val dose : Double
+    val type: String,
+    val dose: Double
 )

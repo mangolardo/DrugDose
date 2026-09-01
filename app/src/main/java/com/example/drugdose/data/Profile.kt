@@ -10,8 +10,8 @@ data class Profile(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val age:Int,
+    val age: Int,
     val weight: Float,
-    val height: Float,
+    val height: Int,
     val pregnant: Boolean
 )

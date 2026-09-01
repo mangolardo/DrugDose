@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
@@ -30,7 +29,6 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import com.example.drugdose.ui.components.AlertBox
@@ -45,18 +43,19 @@ class FormViewModel : ViewModel(){
     fun addAlert(alert : String){
         alerts.add(alert)
     }
+    fun clearAlerts(){
+        alerts =  mutableListOf<String>()
+    }
 }
 
 @Composable
 fun Form(toMedList: Boolean,
          clickAct: () -> Unit,
-         uiState: UiState,
          viewModel: SharedViewModel
 ) {
 
     val formView: FormViewModel = viewModel()
     var isWrong by remember { mutableStateOf(false) }
-    val alerts = formView.alerts
     val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
 
     Scaffold(
@@ -80,6 +79,16 @@ fun Form(toMedList: Boolean,
 
     )}) {
         paddingValues ->
+        if (isWrong) {
+            AlertBox(
+                args = formView.alerts,
+                isMedWarning = false,
+                onDismiss = {
+                    isWrong = false
+                    formView.clearAlerts()
+                }
+            )
+        }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(15.dp),
@@ -93,33 +102,25 @@ fun Form(toMedList: Boolean,
             val nameState: TextFieldState = formView.nameState
             val (selectedOption, onOptionSelected) = remember { mutableStateOf(false) }
 
-
-
-            //val nameState = uiState.nameState
             FormField(
                 state = nameState,
                 label = "Name of profile",
-                isError = nameState.text.isEmpty()
+                isError = nameState.text.length > 10
             )
-
-            //val weightState = uiState.weightState
             FormField(
                 state = weightState,
                 label = "Weight(kg)",
-                isError = validateInput(weightState, "Weight(kg)")
+                isError = validateInputEmpty(weightState, "Weight(kg)")
             )
-
-            //val heightState = uiState.heightState
             FormField(
                 state = heightState,
                 label = "Height(cm)",
-                isError = validateInput(heightState, "Height(cm)")
+                isError = validateInputEmpty(heightState, "Height(cm)")
             )
-            // val ageState = uiState.ageState
             FormField(
                 state = ageState,
                 label = "Age",
-                isError = validateInput(ageState, "Age")
+                isError = validateInputEmpty(ageState, "Age")
             )
             Row(
                 horizontalArrangement = Arrangement.SpaceAround,
@@ -144,20 +145,18 @@ fun Form(toMedList: Boolean,
             val age = ageState.text.toString()
 
             Button(
+
                 //if ontoMedList save profile fields to viewmodel AND save profile to db
                 //else save profile to db and go back profiles
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(25),
                 onClick = {
-//                val hasError = validateInput(ageState, "Age") ||
-//                        validateInput(weightState, "Weight(kg)") ||
-//                        validateInput(heightState, "Height(cm)") ||
-//                        nameState.text.isEmpty()
+
                     if (nameState.text.isEmpty() || ageState.text.isEmpty() || heightState.text.isEmpty() || weightState.text.isEmpty()) formView.addAlert(
                         "Fields can't be empty"
                     )
-                    else if (nameState.text.length > 10) formView.addAlert("Profile name can't be longer than 10 characters")
+                    if (nameState.text.length > 10) formView.addAlert("Profile name can't be longer than 10 characters")
                     if (validateInputEmpty(
                             ageState,
                             "Age"
@@ -173,7 +172,7 @@ fun Form(toMedList: Boolean,
                             "Height(cm)"
                         )
                     ) formView.addAlert("Height must be between 0-220")
-                    val hasError = !alerts.isEmpty()
+                    val hasError = !formView.alerts.isEmpty()
 
                     if (!hasError) {
                         viewModel.resetUi()
@@ -181,7 +180,7 @@ fun Form(toMedList: Boolean,
                             name = name,
                             age = age.toInt(),
                             weight = weight.toFloat(),
-                            height = height.toFloat(),
+                            height = height.toInt(),
                             pregnant = selectedOption
                         )
                         viewModel.addProfile(profile)
@@ -200,15 +199,6 @@ fun Form(toMedList: Boolean,
 
 
         }
-        if (isWrong) {
-            AlertBox(
-                args = alerts,
-                isMedWarning = false,
-                onDismiss = {
-                    isWrong = false
-                    formView.alerts = mutableListOf<String>()
-                }
-            )
-        }
+
     }
 }

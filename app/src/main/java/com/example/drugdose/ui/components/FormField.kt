@@ -3,6 +3,7 @@ package com.example.drugdose.ui.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -32,7 +33,7 @@ fun FormField(
         placeholder = {Text(text="Type here...")},
         shape = RoundedCornerShape(25),
         contentPadding = PaddingValues(8.dp),
+        lineLimits = TextFieldLineLimits.SingleLine,
         isError = isError
     )
 }
-//fix this method

@@ -9,36 +9,6 @@ import com.example.drugdose.data.Profile
 import kotlin.math.abs
 import kotlin.math.sqrt
 
-//write utils to parse and search JSON
-
-//assuming dose is in milligrams
-//fun calculateDose (profile: Profile, medObj : Medicine ):Double {
-////check for max dose
-//
-//    //check min/max age,weight
-//    val age = profile.age
-//    val weight = profile.weight
-//    val height = profile.height
-//    var dose  : Double
-//    if(medObj.unit == "kg"){
-//      dose =   calculateOnKg(medObj.mgPerUnit,weight.toDouble())
-//    }
-//    else if(medObj.unit == "m2") {
-//        dose = calculateOnM2(medObj.mgPerUnit, height.toInt(), weight.toDouble())
-//    } else {
-//        throw Exception("wrong med format")
-//    }
-//
-//    return dose
-//}
-//fun calculateOnKg(dose : Double, w : Double) : Double {
-//return dose*w
-//}
-//fun calculateOnM2(dose : Double, h : Int, w : Double): Double {
-//    val bsa = sqrt(h * w / 3600)
-//return dose * bsa
-//}
-
 fun convertToCommercial(dose : Double, med : Medicine):Dosage{
     //fix this
     val iter = med.dosages.listIterator(1)
@@ -53,24 +23,46 @@ fun convertToCommercial(dose : Double, med : Medicine):Dosage{
     }
     return closest
 }
-//method do convert dose in actual commercial dosage
-fun validateInput(state : TextFieldState, label : String) : Boolean{
-    return if(state.text == "") true else
-        if (label == "Age"){
-            (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 100)
-        }else if(label.contains("Weight")){
-            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 230)
-        } else {
-            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 70 || state.text.toString().toShort() > 220)
-        }
-}
+
+//fun validateInput(state : TextFieldState, label : String) : Boolean{
+//    return if(state.text == "") true else
+//        if (label == "Age"){
+//            (state.text.toString().toIntOrNull() == null || state.text.toString().toInt() <= 0 ||state.text.toString().toInt() > 100)
+//        }else if(label.contains("Weight")){
+//            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 0|| state.text.toString().toShort() > 230)
+//        } else {
+//            (state.text.toString().toShortOrNull() == null || state.text.toString().toShort() <= 70 || state.text.toString().toShort() > 220)
+//        }
+//}
 fun validateInputEmpty(state : TextFieldState, label : String) : Boolean{
     return if(state.text == "") false else
         if (label == "Age"){
             (state.text.toString().toInt() !in 1..100)
         }else if(label.contains("Weight")){
-            (state.text.toString().toShort() !in 1..230)
+            (state.text.toString().toFloat() !in 1.0..230.0)
         } else {
-            (state.text.toString().toShort() !in 71..220)
+            (state.text.toString().toInt() !in 60..220)
         }
+}
+
+fun pluralize(string : String,count: Double) : String {
+    var res : String = string
+    if(count > 1.0) {
+        when (string) {
+            "Packet" -> {
+                res = "Packets"
+
+            }
+
+            "Tablet" -> {
+                res = "Tablets"
+
+            }
+            "Suppository" -> {
+                res = "Suppositories"
+
+            }
+        }
+    }
+    return res
 }
