@@ -1,13 +1,16 @@
 package com.example.drugdose.ui
 
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -29,6 +32,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import com.example.drugdose.ui.components.AlertBox
@@ -39,6 +43,7 @@ class FormViewModel : ViewModel(){
 
     val heightState = TextFieldState()
     val nameState =  TextFieldState()
+    val isPregnant = mutableStateOf(false)
     var alerts = mutableListOf<String>()
     fun addAlert(alert : String){
         alerts.add(alert)
@@ -57,7 +62,7 @@ fun Form(toMedList: Boolean,
     val formView: FormViewModel = viewModel()
     var isWrong by remember { mutableStateOf(false) }
     val pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-
+    val color = MaterialTheme.colorScheme.onBackground
     Scaffold(
         topBar ={TopAppBar(
             {
@@ -68,7 +73,7 @@ fun Form(toMedList: Boolean,
                         val strokeWidthPx = 1.dp.toPx()
                         val verticalOffset = size.height - 2.sp.toPx()
                         drawLine(
-                            color = Color.Black,
+                            color = color,
                             strokeWidth = strokeWidthPx,
                             start = Offset(0f, verticalOffset),
                             end = Offset(size.width, verticalOffset),
@@ -94,13 +99,13 @@ fun Form(toMedList: Boolean,
             verticalArrangement = Arrangement.spacedBy(15.dp),
             modifier = Modifier
                 .fillMaxSize()
-                .padding(vertical=paddingValues.calculateTopPadding(), horizontal = 16.dp)
+                .padding(paddingValues).verticalScroll(rememberScrollState())
         ) {
             val ageState: TextFieldState = formView.ageState
             val weightState: TextFieldState = formView.weightState
             val heightState: TextFieldState = formView.heightState
             val nameState: TextFieldState = formView.nameState
-            val (selectedOption, onOptionSelected) = remember { mutableStateOf(false) }
+            val (selectedOption, onOptionSelected) = formView.isPregnant
 
             FormField(
                 state = nameState,
@@ -125,7 +130,7 @@ fun Form(toMedList: Boolean,
             Row(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
             ) {
                 Column(
                     modifier = Modifier.weight(1f),
@@ -149,7 +154,7 @@ fun Form(toMedList: Boolean,
                 //if ontoMedList save profile fields to viewmodel AND save profile to db
                 //else save profile to db and go back profiles
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth().padding(horizontal = 16.dp),
                 shape = RoundedCornerShape(25),
                 onClick = {
 

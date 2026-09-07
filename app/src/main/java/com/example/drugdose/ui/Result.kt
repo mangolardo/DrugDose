@@ -1,18 +1,15 @@
 package com.example.drugdose.ui
 
-import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,10 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.dropShadow
-import androidx.compose.ui.draw.innerShadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PaintingStyle.Companion.Stroke
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -36,23 +29,20 @@ import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.DosageRule
 import com.example.drugdose.ui.components.AlertBox
-import kotlinx.serialization.json.Json
 import java.math.RoundingMode
 
 @Composable
-fun Result(uiState: UiState, viewModel: SharedViewModel, onClickAct : () -> Unit ) {
+fun Result( viewModel: SharedViewModel, onClickAct : () -> Unit ) {
 
                 ResultContent(viewModel, onClickAct)
 }
 @Composable
 fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var isAlert = false
+    var isAlert by remember{ mutableStateOf(false)}
     val alerts = mutableListOf<String>()
     val profile = uiState.selectedProfile
     val med = uiState.selectedMed
@@ -96,7 +86,9 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
             isAlert = true
         }
         if (isAlert) {
-            AlertBox(args = alerts, isMedWarning = true)
+            AlertBox(args = alerts, isMedWarning = true){
+                isAlert = false
+            }
         }
         Column(
             modifier = Modifier

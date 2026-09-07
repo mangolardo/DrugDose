@@ -1,7 +1,9 @@
 package com.example.drugdose.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.TextFieldState
@@ -21,19 +23,22 @@ fun FormField(
     label : String,
     isError : Boolean = false
 ){
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
-        state = state,
-        labelPosition = TextFieldLabelPosition.Above(Alignment.Start),
-        label = {
-            Text(
-                text=label,
-               style = MaterialTheme.typography.bodyLargeEmphasized
-        )},
-        placeholder = {Text(text="Type here...")},
-        shape = RoundedCornerShape(25),
-        contentPadding = PaddingValues(8.dp),
-        lineLimits = TextFieldLineLimits.SingleLine,
-        isError = isError
-    )
+    Row(Modifier.padding( horizontal = 16.dp )) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            state = state,
+            labelPosition = TextFieldLabelPosition.Above(Alignment.Start),
+            label = {
+                Text(
+                    text = label,
+                    style = MaterialTheme.typography.bodyLargeEmphasized
+                )
+            },
+            placeholder = { Text(text = "Type here...") },
+            shape = RoundedCornerShape(25),
+            contentPadding = PaddingValues(8.dp),
+            lineLimits = TextFieldLineLimits.SingleLine,
+            isError = isError
+        )
+    }
 }

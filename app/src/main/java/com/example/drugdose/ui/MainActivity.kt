@@ -99,10 +99,8 @@ fun AppNav(uiS : UiState,viewModel: SharedViewModel) {
 
         composable("Result") {
             Result(
-                viewModel = viewModel,
-                uiState = uiS,
-                onClickAct = {navControl.navigate("DoseMain")}
-            )
+                viewModel = viewModel
+            ) { navControl.navigate("DoseMain") }
         }
         composable("FormToMeds") {
             Form(
