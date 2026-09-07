@@ -37,15 +37,16 @@ fun convertToCommercial(dose : Double, med : Medicine):Dosage{
 //        }
 //}
 fun validateInputEmpty(state : TextFieldState, label : String) : Boolean{
+     val decimalRegex = Regex("^\\d+(\\.\\d)?$")
     return if(state.text == "") false else
         if (label == "Age"){
             if( state.text.isDigitsOnly()){
-            (state.text.toString().toInt() !in 1..100)} else {
+            (state.text.toString().toInt() !in 0..100)} else {
                 true
             }
         }else if(label.contains("Weight")){
-            if( state.text.isDigitsOnly()){
-            (state.text.toString().toFloat() !in 1.0..230.0)} else {
+            if( decimalRegex.matches(state.text.toString())){
+            (state.text.toString().toFloat() !in 3.0..230.0)} else {
                 true
             }
         } else {

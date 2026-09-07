@@ -55,6 +55,7 @@ class EditViewModel : ViewModel(){
     var heightState = TextFieldState()
     var nameState =  TextFieldState()
     var alerts = mutableListOf<String>()
+    var isEdit = mutableStateOf(false)
     fun addAlert(alert : String){
         alerts.add(alert)
     }
@@ -63,7 +64,8 @@ class EditViewModel : ViewModel(){
 fun ProfileDetail(uiState: UiState,viewModel: SharedViewModel) {
     val editViewModel : EditViewModel = viewModel()
     var isWrong by remember { mutableStateOf(false)}
-    var isEdit by remember { mutableStateOf(false) }
+    var isEdit by editViewModel.isEdit
+ //   var isEdit by remember { mutableStateOf(false) }
     val profile = uiState.selectedProfile
     var isPreg by remember {mutableStateOf(profile!!.pregnant)}
     val labels = listOf("Age", "Height", "Weight")

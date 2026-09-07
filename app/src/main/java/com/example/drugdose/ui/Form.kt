@@ -171,12 +171,12 @@ fun Form(toMedList: Boolean,
                             weightState,
                             "Weight(kg)"
                         )
-                    ) formView.addAlert("Weight must be between 0-230")
+                    ) formView.addAlert("Weight must be between 3-230")
                     if (validateInputEmpty(
                             heightState,
                             "Height(cm)"
                         )
-                    ) formView.addAlert("Height must be between 0-220")
+                    ) formView.addAlert("Height must be between 60-220")
                     val hasError = !formView.alerts.isEmpty()
 
                     if (!hasError) {

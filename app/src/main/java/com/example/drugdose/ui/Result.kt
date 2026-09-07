@@ -149,11 +149,11 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     text = "${
                         dose.toBigDecimal().setScale(
                             1,
-                            RoundingMode.HALF_DOWN
+                            RoundingMode.DOWN
                         )
                     } mg \n or \n " + n.toBigDecimal().setScale(
                         1,
-                        RoundingMode.HALF_DOWN
+                        RoundingMode.DOWN
                     ) + " " + string,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyLarge
@@ -212,11 +212,11 @@ fun ResultContent(viewModel: SharedViewModel,onClickAct : () -> Unit) {
                     text = "${
                         maxDose.toBigDecimal().setScale(
                             1,
-                            RoundingMode.HALF_DOWN
+                            RoundingMode.DOWN
                         )
                     } mg \n or \n " + nn.toBigDecimal().setScale(
                         1,
-                        RoundingMode.HALF_DOWN
+                        RoundingMode.DOWN
                     ) + " " + string,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodyLarge
