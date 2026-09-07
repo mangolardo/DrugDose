@@ -3,11 +3,13 @@ package com.example.drugdose.ui
 import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.core.text.isDigitsOnly
 import com.example.drugdose.data.Dosage
 import com.example.drugdose.data.Medicine
 import com.example.drugdose.data.Profile
 import kotlin.math.abs
 import kotlin.math.sqrt
+import kotlin.reflect.typeOf
 
 fun convertToCommercial(dose : Double, med : Medicine):Dosage{
     //fix this
@@ -37,11 +39,20 @@ fun convertToCommercial(dose : Double, med : Medicine):Dosage{
 fun validateInputEmpty(state : TextFieldState, label : String) : Boolean{
     return if(state.text == "") false else
         if (label == "Age"){
-            (state.text.toString().toInt() !in 1..100)
+            if( state.text.isDigitsOnly()){
+            (state.text.toString().toInt() !in 1..100)} else {
+                true
+            }
         }else if(label.contains("Weight")){
-            (state.text.toString().toFloat() !in 1.0..230.0)
+            if( state.text.isDigitsOnly()){
+            (state.text.toString().toFloat() !in 1.0..230.0)} else {
+                true
+            }
         } else {
-            (state.text.toString().toInt() !in 60..220)
+            if( state.text.isDigitsOnly()){
+            (state.text.toString().toInt() !in 60..220)} else {
+                true
+            }
         }
 }
 
